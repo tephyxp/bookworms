@@ -55,6 +55,7 @@
                             <td><?=$book['author'] ?></td>
                             <td><?=$book['description'] ?></td>
                             <td><?=$book['isbn'] ?></td>
+                            <td><img src="data:image/jpeg;base64,<?=base64_encode($book['image']) ?>" alt="Book Image"></td>
                         </tr>
                     <?php endforeach; ?>
                 <?php else: ?>
