@@ -36,7 +36,17 @@
 
             </form>
         </header>
-        <h1>es SOLO una prueba</h1>
+        <h1 class="m-3">es SOLO una prueba</h1>
+
+        <form class="row g-3">
+            <div class="col-auto">
+                
+                <input type="text" class="form-control" id="inputPassword2" placeholder="Buscar">
+            </div>
+            <div class="col-auto">
+                <button type="submit" class="btn btn-primary mb-3">Buscar </button>
+            </div>
+        </form>
         
         <table class="table">
             <thead>
