@@ -10,11 +10,11 @@
     $books = $booksController->getBooks();
     // var_dump($books);
 
-    if ($_SERVER[ 'REQUEST_METHOD' ] == 'POST'){
-        $userController = new UserController();
+    if ($_SERVER[ 'REQUEST_METHOD' ] === 'POST'){
+        $userController = new UserController;
         $userController->login();
     }
-    
+
 ?>
 
 <!doctype html>
@@ -27,9 +27,9 @@
     </head>
     <body>
         <header>
-            <form action="" method="POST">
+            <form action="" method="post">
                 <label for="user">Usuario:</label>
-                <input type="text" name="name">
+                <input type="text" name="user">
                 <label for="password">Contraseña:</label>
                 <input type="password" name="password">
                 <button type="submit">Iniciar sesión</button>

@@ -8,7 +8,7 @@ class UserController {
     private $userModel;
 
     public function __construct(){
-        $this -> userModel =  new UserModel();
+        $this -> userModel =  new UserModel;
         
     }
 
@@ -18,7 +18,7 @@ class UserController {
 
     public function login(){
 
-    if ($_SERVER[ 'REQUEST_METHOD' ] == 'POST') {
+    if ($_SERVER[ 'REQUEST_METHOD' ] === 'POST') {
         if(isset ($_POST["user"]) && isset($_POST["password"])){
             $postedUser=$_POST["user"];
             $postedPassword=$_POST['password'];
@@ -29,15 +29,14 @@ class UserController {
                 if($user['user']==$postedUser && $user['password']==$postedPassword){
                     session_start();
                     $_SESSION['user']=$postedUser;
-                    header('Location:../view/booksAdministration.php');
+                    header('Location: src/view/booksAdministration.php');
+                    exit();
                 }
 
             }
             echo  "Usuario o contraseña incorrecta";
 
         }
-
-        
-}
+    }
 }
 }
