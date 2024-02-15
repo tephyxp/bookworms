@@ -24,4 +24,12 @@
              //ejecutamos
             return ($stmt->execute()) ? $stmt->fetchAll(PDO::FETCH_ASSOC) : false;
         }
+        
+        public function getBookDetails($id)
+        {
+            $query = "SELECT * FROM books WHERE id = :id LIMIT 1";
+            $stmt = $this->PDO->prepare($query);
+            $stmt->bindParam(":id",$id);
+            return ($stmt->execute()) ? $stmt->fetch() : false;
+        }
     }
