@@ -3,11 +3,18 @@
 
     require_once __DIR__ . "/vendor/autoload.php";
     use Controller\BooksController;
-    
+    use Controller\UserController;
+
+
     $booksController = new BooksController();
     $books = $booksController->getBooks();
     // var_dump($books);
 
+    if ($_SERVER[ 'REQUEST_METHOD' ] == 'POST'){
+        $userController = new UserController();
+        $userController->login();
+    }
+    
 ?>
 
 <!doctype html>
@@ -19,6 +26,16 @@
         <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     </head>
     <body>
+        <header>
+            <form action="" method="POST">
+                <label for="user">Usuario:</label>
+                <input type="text" name="name">
+                <label for="password">Contraseña:</label>
+                <input type="password" name="password">
+                <button type="submit">Iniciar sesión</button>
+
+            </form>
+        </header>
         <h1>es SOLO una prueba</h1>
         
         <table class="table">
