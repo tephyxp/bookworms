@@ -32,4 +32,13 @@
             $stmt->bindParam(":id",$id);
             return ($stmt->execute()) ? $stmt->fetch() : false;
         }
+
+        public function searchBooks($keyword)
+        {
+            $query = "SELECT * FROM books WHERE title LIKE :keyword OR author LIKE :keyword";
+            $stmt = $this->PDO->prepare($query);
+            $keyword = "%$keyword%";
+            $stmt->bindParam(":keyword", $keyword);
+            return ($stmt->execute()) ? $stmt->fetchAll(PDO::FETCH_ASSOC) : false;
+        }
     }
