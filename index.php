@@ -70,12 +70,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             <?php foreach ($books as $book) : ?>
                 <div class="col-md-3">
                     <div class="card custom-card" style="width: 18rem;">
-                        <img src="data:image/jpeg;base64,<?= base64_encode($book['image']) ?>" class="rounded-3 card-img-top py-3 px-5 " alt="Book Image">
+                        <img src="data:image/jpeg; base64,<?= base64_encode($book['image']) ?>" class="rounded-3 card-img-top py-3 px-5 " alt="Book Image">
                         <div class="card-body d-flex flex-column justify-content-center align-items-center">
                             <h4 class="card-title text-center"><?= $book['title'] ?></h4>
                             <p class="card-text text-center fw-bolder"><strong></strong> <?= $book['author'] ?></p>
                             <p class="card-text small text-center"><strong></strong> <?= $book['description'] ?></p>
-                            <!-- <p class="card-text"><strong>ISBN:</strong> <?= $book['isbn'] ?></p> -->
                             <button href="#" class="btn btn-light rounded-3"style="background-color: #8bca54;color: white;">Ver más</button>
                         </div>
                     </div>

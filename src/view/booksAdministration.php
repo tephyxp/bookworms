@@ -26,7 +26,7 @@ if (isset($_POST["addBook"])) {
         $isbn = $_POST["isbn"];
         $title = $_POST["title"];
         $author = $_POST["author"];
-        $image = ($_FILES["image"]); 
+        $image = file_get_contents($_FILES["image"]["tmp_name"]); 
         $description = $_POST["description"];
 
         $newbook = new BooksController;

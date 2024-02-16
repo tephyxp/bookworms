@@ -44,17 +44,17 @@
 
         public function addBook($isbn, $title, $author, $image, $description)
         {
-            $query = "INSERT INTO books(isbn, title, author, image, description) VALUES (:isbn, :title, :author, :image, :description)";
+            $query = "INSERT INTO books(id, isbn, title, author, image, description) VALUES (null, :isbn, :title, :author, :image, :description)";
 
             $stmt = $this->PDO->prepare($query);
             $stmt->bindParam(':isbn', $isbn, PDO::PARAM_STR);
             $stmt->bindParam(':title', $title, PDO::PARAM_STR);
             $stmt->bindParam(':author', $author, PDO::PARAM_STR);
-            $stmt->bindParam(':image', $image);
+            $stmt->bindParam(':image', $image, PDO::PARAM_LOB);
             $stmt->bindParam(':description', $description, PDO::PARAM_STR);
 
             if ($stmt->execute()) {
-                return true;
+                return $this->PDO->lastInsertId();
             } else{
                 return false;
             }
