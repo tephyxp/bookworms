@@ -81,6 +81,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                             <h4 class="card-title text-center custom-title"><?= $book['title'] ?></h4>
                             <p class="card-text text-center fw-bolder"><strong></strong> <?= $book['author'] ?></p>
                             <p class="card-text small text-center description"><strong></strong> <?= $book['description'] ?></p>
+
                             <button href="#" class="btn btn-light rounded-3 primary-button custom-button">Ver más</button>
                         </div>
                     </div>
