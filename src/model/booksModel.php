@@ -41,4 +41,33 @@
             $stmt->bindParam(":keyword", $keyword);
             return ($stmt->execute()) ? $stmt->fetchAll(PDO::FETCH_ASSOC) : false;
         }
+
+        public function addBook($isbn, $title, $author, $image, $description)
+        {
+            $query = "INSERT INTO books(id, isbn, title, author, image, description) VALUES (null, :isbn, :title, :author, :image, :description)";
+
+            $stmt = $this->PDO->prepare($query);
+            $stmt->bindParam(':isbn', $isbn, PDO::PARAM_STR);
+            $stmt->bindParam(':title', $title, PDO::PARAM_STR);
+            $stmt->bindParam(':author', $author, PDO::PARAM_STR);
+            $stmt->bindParam(':image', $image, PDO::PARAM_LOB);
+            $stmt->bindParam(':description', $description, PDO::PARAM_STR);
+
+            if ($stmt->execute()) {
+                return $this->PDO->lastInsertId();
+            } else{
+                return false;
+            }
+        }
+
+        public function deleteBook($id) {
+            $query = 'DELETE FROM books WHERE id = :id';
+            $stmt = $this->PDO->prepare($query);
+            $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+            if ($stmt->execute()) {
+                return true;
+        } else {
+            die('error' . $stmt->errorInfo()[2]);
+        }
     }
+}

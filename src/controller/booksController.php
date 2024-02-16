@@ -25,4 +25,21 @@
             $keyword = isset($_GET['keyword']) ? $_GET['keyword'] : '';
             return  $this->model->searchBooks($keyword);
         }
+
+        public function addBook($isbn, $title, $author, $image, $description)
+        {
+            if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['addBook'])) {
+                
+                if( !empty($isbn) && !empty($title) && !empty($author) && !empty($image) && !empty($description) ) {
+                    $result = $this->model->addBook($isbn, $title, $author, $image, $description);
+                    return header( "Location: ../view/booksAdministration.php");
+                } else {
+                    return 'Error al crear el libro';
+                }
+            }
+        }
+
+        public function deleteBook($id) {
+            return ($this->model->deleteBook($id)) ? header( "Location: ../view/booksAdministration.php") : 'error eliminar libro';
+        }
     }

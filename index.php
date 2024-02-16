@@ -38,45 +38,49 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <title>Bootstrap demo</title>
     <link rel="stylesheet" href="./resources/styles.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+    <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@400;700&display=swap">
+
 </head>
 
-<body>
-    <header>
-        <form action="" method="post">
-            <label for="user">Usuario:</label>
-            <input type="text" name="user">
-            <label for="password">Contraseña:</label>
-            <input type="password" name="password">
-            <button type="submit">Iniciar sesión</button>
-
+<body class="custom-bd">
+    <header class="my-3 mx-5 d-flex justify-content-between align-items-center">
+        <a href="./index.php">
+            <img src="./resources/img/bookworms.png" alt="Logo" class="logo">
+        </a>
+        <form action="" method="post" class="form-inline mb-3 d-flex justify-content-around align-items-center">
+            <label for="user" class="me-2">Usuario:</label>
+            <input class="custom-input me-2" type="text" name="user">
+            <label for="password" class="me-2">Contraseña:</label>
+            <input class="custom-input me-2 " type="password" name="password">
+            <button class="btn btn-primary ml-2 secondary-button me-2" type="submit">Iniciar sesión</button>
         </form>
     </header>
-    <h1 class="m-3">es SOLO una prueba</h1>
-
-        <form class="row g-3" action="?action=search" method="get">
+    <h1 class="m-3 text-center my-5 first-title">BOOKWORMS</h1>
+    <section class="d-flex justify-content-center">
+        <form class="row g-3 m-2" action="?action=search" method="get">
             <div class="col-auto">
                 
-                <input type="text" name="keyword" class="form-control" id="inputPassword2" placeholder="Buscar">
+                <input type="text" name="keyword" class="form-control custom-input" id="inputPassword2" placeholder="Buscar">
             </div>
             <div class="col-auto">
-                <button type="submit" class="btn btn-primary mb-3">Buscar </button>
+                <button type="submit" class="btn btn-primary mb-3 secondary-button">Buscar </button>
             </div>
         </form>
-
-
+    </section>
+        
     <div class="container mt-5">
     <div class="row g-4">
         <?php if ($books) : ?>
             <?php foreach ($books as $book) : ?>
                 <div class="col-md-3">
                     <div class="card custom-card" style="width: 18rem;">
-                        <img src="data:image/jpeg;base64,<?= base64_encode($book['image']) ?>" class="rounded-3 card-img-top py-3 px-5 " alt="Book Image">
+                        <img src="data:image/jpeg; base64,<?= base64_encode($book['image']) ?>" class="rounded-3 card-img-top py-3 px-5 " alt="Book Image">
                         <div class="card-body d-flex flex-column justify-content-center align-items-center">
-                            <h4 class="card-title text-center"><?= $book['title'] ?></h4>
+                            <h4 class="card-title text-center custom-title"><?= $book['title'] ?></h4>
                             <p class="card-text text-center fw-bolder"><strong></strong> <?= $book['author'] ?></p>
-                            <p class="card-text small text-center"><strong></strong> <?= $book['description'] ?></p>
-                            <!-- <p class="card-text"><strong>ISBN:</strong> <?= $book['isbn'] ?></p> -->
-                            <button href="#" class="btn btn-light rounded-3"style="background-color: #8bca54;color: white;">Ver más</button>
+                            <p class="card-text small text-center description"><strong></strong> <?= $book['description'] ?></p>
+
+                            <button href="#" class="btn btn-light rounded-3 primary-button custom-button">Ver más</button>
                         </div>
                     </div>
                 </div>
