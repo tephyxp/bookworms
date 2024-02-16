@@ -16,6 +16,7 @@ use PDOException;
 
         $env = parse_ini_file(__DIR__ . '/../.env');
         
+        
         $this->host = $env['DDBB_HOST']; 
         $this->db_name = $env['DDBB_NAME'];
         $this->username = $env['DDBB_USER'];
