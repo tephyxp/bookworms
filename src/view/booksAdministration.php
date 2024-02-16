@@ -37,7 +37,8 @@ if (isset($_POST["addBook"])) {
 
     $booksController = new BooksController();
     $books = $booksController->getBooks();
-    $booksController->deleteBook($_GET['id']);
+    //$booksController->deleteBook($_GET['id']);
+    
 
 ?>
 
@@ -98,12 +99,23 @@ if (isset($_POST["addBook"])) {
                 <p>delete</p>
                 <p>edit</p>
                 <article>
-                    <img src="" alt="portada  del libro"/>
-                    <div>
-                        <h3>Title</h3>
-                        <h4>Autor</h4>
-                        <p>Descripción</p>
+                    <?php if ($books) : ?>
+                <?php foreach ($books as $book) : ?>
+                    <div class="col-md-3">
+                        <div class="card custom-card" style="width: 18rem;">
+                            <img src="data:image/jpeg; base64,<?= base64_encode($book['image']) ?>" class="rounded-3 card-img-top py-3 px-5 " alt="Book Image">
+                            <div class="card-body d-flex flex-column justify-content-center align-items-center">
+                                <h4 class="card-title text-center"><?= $book['title'] ?></h4>
+                                <p class="card-text text-center fw-bolder"><strong></strong> <?= $book['author'] ?></p>
+                                <p class="card-text small text-center"><strong></strong> <?= $book['description'] ?></p>
+                                <a href="../view/booksAdministration.php?id=<?= $book['id'] ?>" class="btn btn-danger rounded-3"style="background-color: #8bca54;color: white;">Eliminar</a>
+                            </div>
+                        </div>
                     </div>
+                <?php endforeach; ?>
+            <?php else : ?>
+                <p>No hay libros en la base de datos.</p>
+            <?php endif; ?>
                 </article>
             </div>
         </section>

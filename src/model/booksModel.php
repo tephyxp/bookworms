@@ -70,3 +70,4 @@
             die('error' . $stmt->errorInfo()[2]);
         }
     }
+}
