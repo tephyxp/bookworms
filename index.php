@@ -7,14 +7,25 @@ use Controller\BooksController;
 use Controller\UserController;
 
 
-$booksController = new BooksController();
-$books = $booksController->getBooks();
-// var_dump($books);
+    $booksController = new BooksController();
+    $books = $booksController->getBooks();
+    
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $userController = new UserController;
     $userController->login();
 }
+
+    $action = isset($_GET['action']) ? $_GET['action'] : 'search';
+    switch ($action) {
+        case 'search':
+            $books = $booksController->searchBooks();
+            break;
+            default:
+            echo "404 Página no encontrada";
+            break;
+        }
+        
 
 ?>
 
@@ -40,7 +51,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
         </form>
     </header>
-    <h1>es SOLO una prueba</h1>
+    <h1 class="m-3">es SOLO una prueba</h1>
+
+        <form class="row g-3" action="?action=search" method="get">
+            <div class="col-auto">
+                
+                <input type="text" name="keyword" class="form-control" id="inputPassword2" placeholder="Buscar">
+            </div>
+            <div class="col-auto">
+                <button type="submit" class="btn btn-primary mb-3">Buscar </button>
+            </div>
+        </form>
+
 
     <div class="container mt-5">
     <div class="row g-4">
@@ -66,9 +88,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 </div>
 
 
-    ?>
-
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
-</body>
-
-</html>
+        <?php
+        require_once __DIR__ . '/src/view/head/footer.php';
+        ?>

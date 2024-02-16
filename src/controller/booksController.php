@@ -20,4 +20,9 @@
         public function getBookDetails($id){
             return ($this ->model->getBookDetails($id) !=false) ? $this->model->getBookDetails($id) : 'El libro no existe';
         }
+
+        public function searchBooks(){
+            $keyword = isset($_GET['keyword']) ? $_GET['keyword'] : '';
+            return  $this->model->searchBooks($keyword);
+        }
     }
