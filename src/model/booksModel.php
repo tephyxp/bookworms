@@ -41,4 +41,22 @@
             $stmt->bindParam(":keyword", $keyword);
             return ($stmt->execute()) ? $stmt->fetchAll(PDO::FETCH_ASSOC) : false;
         }
+
+        public function addBook($isbn, $title, $author, $image, $description)
+        {
+            $query = "INSERT INTO books(isbn, title, author, image, description) VALUES (:isbn, :title, :author, :image, :description)";
+
+            $stmt = $this->PDO->prepare($query);
+            $stmt->bindParam(':isbn', $isbn, PDO::PARAM_STR);
+            $stmt->bindParam(':title', $title, PDO::PARAM_STR);
+            $stmt->bindParam(':author', $author, PDO::PARAM_STR);
+            $stmt->bindParam(':image', $image);
+            $stmt->bindParam(':description', $description, PDO::PARAM_STR);
+
+            if ($stmt->execute()) {
+                return true;
+            } else{
+                return false;
+            }
+        }
     }
