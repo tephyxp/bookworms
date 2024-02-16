@@ -24,6 +24,5 @@
         public function searchBooks(){
             $keyword = isset($_GET['keyword']) ? $_GET['keyword'] : '';
             return  $this->model->searchBooks($keyword);
-            // require 'views/search_view.php';
         }
     }

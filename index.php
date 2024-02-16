@@ -8,7 +8,7 @@
 
     $booksController = new BooksController();
     $books = $booksController->getBooks();
-    // var_dump($books);
+    
 
     if ($_SERVER[ 'REQUEST_METHOD' ] === 'POST'){
         $userController = new UserController;
