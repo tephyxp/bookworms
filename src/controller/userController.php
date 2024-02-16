@@ -31,12 +31,19 @@ class UserController {
                     $_SESSION['user']=$postedUser;
                     header('Location: src/view/booksAdministration.php');
                     exit();
-                }
+                    }
 
-            }
+                }
             echo  "Usuario o contraseña incorrecta";
 
+            }
         }
     }
-}
+
+    public function logout(){
+        session_start();
+        session_destroy();
+        header("Location: ../../index.php");
+        exit();
+    }
 }
