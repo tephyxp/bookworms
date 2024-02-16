@@ -35,6 +35,10 @@ if (isset($_POST["addBook"])) {
     }
 }
 
+    $booksController = new BooksController();
+    $books = $booksController->getBooks();
+    $booksController->deleteBook($_GET['id']);
+
 ?>
 
 <html lang="en">

@@ -38,4 +38,8 @@
                 }
             }
         }
+
+        public function deleteBook($id) {
+            return ($this->model->deleteBook($id)) ? header( "Location: ../view/booksAdministration.php") : 'error eliminar libro';
+        }
     }
