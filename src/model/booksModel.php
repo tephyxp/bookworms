@@ -59,4 +59,14 @@
                 return false;
             }
         }
+
+        public function deleteBook($id) {
+            $query = 'DELETE FROM books WHERE id = :id';
+            $stmt = $this->PDO->prepare($query);
+            $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+            if ($stmt->execute()) {
+                return true;
+        } else {
+            die('error' . $stmt->errorInfo()[2]);
+        }
     }
