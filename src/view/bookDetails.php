@@ -45,8 +45,10 @@ $book = $singleBook->getBookDetails($_GET["id"]);
     <h4 class="custom-blue-text mt-3"><?= $book["author"];?></h4>
     <p class="paragraph-text mt-3"><?= $book["description"];?></p>
     </article>
-  </body>
-</html>
+  
+    <?php
+        require_once __DIR__ . '/head/footer.php';
+    ?>
 
 
 
