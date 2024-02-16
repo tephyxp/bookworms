@@ -28,7 +28,7 @@ Deberán desarrollar una web utilizando PHP con una arquitectura MVC, con conexi
 ## 🎨 Mockups 🎨
 
 ![alt text](/resources/imgReadme/image.png)
-![alt text](/resources/imgReadme/image2.png)
+![alt text](/resources/imgReadme/image22.png)
 ![alt text](/resources/imgReadme/image3.png)
 
 ## 💻 Tecnologías 💻
