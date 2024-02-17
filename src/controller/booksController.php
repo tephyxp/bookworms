@@ -42,4 +42,14 @@
         public function deleteBook($id) {
             return ($this->model->deleteBook($id)) ? header( "Location: ../view/booksAdministration.php") : 'error eliminar libro';
         }
-    }
+    
+        
+        public function editBook($id, $isbn, $title, $author, $image, $description) {
+            // Assuming you have a method to update book details in your data source
+            $result = $this->model->editBook($id, $isbn, $title, $author, $image, $description);
+        
+            return $result;
+        }
+        }
+        
+

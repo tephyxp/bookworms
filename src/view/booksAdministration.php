@@ -41,6 +41,31 @@ $books = $booksController->getBooks();
 if (isset($_GET['id'])) {
     $booksController->deleteBook($_GET['id']);
 }
+
+$booksController = new \Controller\BooksController();
+
+$bookId = isset($_GET['id']) ? $_GET['id'] : null;
+
+$title = '';
+$author = '';
+$isbn = '';
+$image = '';
+$description = '';
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    if ($bookId === null) {
+        $result = $booksController->addBook($_POST['isbn'], $_POST['title'], $_POST['author'], $_FILES['image'], $_POST['description']);
+    } else {
+        $result = $booksController->editBook($bookId, $_POST['isbn'], $_POST['title'], $_POST['author'], $_FILES['image'], $_POST['description']);
+    }
+    if ($result) {
+        header("Location: ../view/booksAdministration.php");
+        exit();
+    } else {
+        'Error al editar el libro';
+    }
+}
+
 ?>
 
 <html lang="en">
@@ -72,7 +97,7 @@ if (isset($_GET['id'])) {
                 <?php endif; ?>
             </div>
         </div>
-        <form action="" method="post" enctype="multipart/form-data" class="form-control">
+        <form action="<?= $_SERVER['PHP_SELF'] ?>" method="post" enctype="multipart/form-data" class="form-control">
             <div>
                 <label for="title" class="form-control">Titulo:
                     <input class="form-control" type="text" name="title">
@@ -89,7 +114,9 @@ if (isset($_GET['id'])) {
                 <label for="description">Descripción:
                     <textarea name="description"> </textarea>
             </div>
-            <button type="submit" name="addBook">Añadir</button>
+            <button type="submit" name="<?= ($bookId !== null) ? 'editBook' : 'addBook' ?>">
+        <?= ($bookId !== null) ? 'Guardar Cambios' : 'Añadir' ?>
+    </button>
         </form>
 
         <input type="search" id="search" placeholder="Buscar..." />
@@ -97,8 +124,8 @@ if (isset($_GET['id'])) {
 
         <section>
             <div>
-                <p>delete</p>
-                <p>edit</p>
+                <!-- <p>delete</p>
+                <p>edit</p> -->
                 <article>
                     <?php if ($books) : ?>
                         <?php foreach ($books as $book) : ?>
@@ -110,7 +137,7 @@ if (isset($_GET['id'])) {
                                         <p class="card-text text-center fw-bolder"><strong></strong> <?= $book['author'] ?></p>
                                         <p class="card-text small text-center"><strong></strong> <?= $book['description'] ?></p>
                                         <a href="../view/booksAdministration.php?id=<?= $book['id'] ?>" class="btn btn-danger rounded-3">Eliminar</a>
-                                        <a href="#" class="btn btn-success rounded-3">Editar</a>
+                                        <a href="../view/booksAdministration.php?id=<?= $book['id'] ?>" class="btn btn-success rounded-3" class="btn btn-success rounded-3">Editar</a>
                                     </div>
                                 </div>
                             </div>

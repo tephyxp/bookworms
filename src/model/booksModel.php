@@ -70,4 +70,17 @@
             die('error' . $stmt->errorInfo()[2]);
         }
     }
-}
+        public function editBook($id, $isbn, $title, $author, $image, $description) {
+            $query = "UPDATE books SET isbn = :isbn, title = :title, author = :author, image = :image, description = :description WHERE id = :id";
+            
+            $stmt = $this->PDO->prepare($query);
+            $stmt->bindParam(':id', $id);
+            $stmt->bindParam(':isbn', $isbn);
+            $stmt->bindParam(':title', $title);
+            $stmt->bindParam(':author', $author);
+            $stmt->bindParam(':image', $image);
+            $stmt->bindParam(':description', $description);
+        
+            return $stmt->execute();
+        }
+    }
