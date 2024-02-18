@@ -53,7 +53,11 @@ if (isset($_GET['id'])) {
     <link rel="stylesheet" href="../../resources/styles.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@400;700&display=swap">
-
+    <style>
+        .form-control {
+            display: grid !important;
+        }
+    </style>
 </head>
 
 <body class="custom-bd">
@@ -75,41 +79,49 @@ if (isset($_GET['id'])) {
                 <?php endif; ?>
             </div>
         </div>
-        <form action="" method="post" enctype="multipart/form-data" class="form-control">
+        <form action="" method="post" enctype="multipart/form-data">
             <div class="container">
                 <div class="row">
                     <div class="col-md-6">
-                        <div class="mb-3">
-                            <label for="title" class="custom-input mb-2">Titulo:
+                        <div class="mb-2">
+                            <label for="title">Titulo:
                                 <input class="form-control custom-input mb-2" type="text" name="title">
                             </label>
                         </div>
-                        <div class="mb-3">
+                        <div class="mb-2">
                             <label for="author">Autor:
                                 <input type="text" name="author" class="custom-input form-control mb-2">
                             </label>
                         </div>
-                        <label for="isbn">ISBN:
-                            <input type="text" name="isbn" class="custom-input form-control mb-2"> </input>
-                        </label>
+                        <div class="mb-2">
+                            <label for="isbn">ISBN:
+                                <input type="text" name="isbn" class="custom-input form-control mb-2"> </input>
+                            </label>
+                        </div>
                     </div>
                     <div class="col-md-6">
-                        <label for="image">Imagen:
-                            <input type="file" name="image" class="mb-2"> </input>
-                        </label>
-                        <label for="description">Descripción:
-                            <textarea name="description" class="custom-input mb-2"> </textarea>
-                        </label>
+                        <div class="mb-2">
+                            <label for="image">Imagen:
+                                <input type="file" name="image" class="mb-2 form-control"> </input>
+                            </label>
+                        </div>
+                        <div class="mb-2">
+                            <label for="description">Descripción:
+                                <textarea name="description" class="custom-input form-control mb-2"> </textarea>
+                            </label>
+                        </div>
                     </div>
-                    <div class="col-md-12 text-center mt-3">    
-                        <button type="submit" name="addBook" class="btn btn-primary mb-3 custom-button primary-button ">Añadir</button>
+                    <div class="col-md-12 text-center mt-4">    
+                        <button type="submit" name="addBook" class="btn btn-primary mb-3 custom-button primary-button">Añadir</button>
                     </div>
                 </div>
             </div>
         </form>
 
-        <input type="search" id="search" placeholder="Buscar..." />
-        <button>Buscar</button>
+        <div class="col-md-12 text-center mt-4">
+            <input type="search" id="search" placeholder="Buscar..." class="custom-input mt-3" />
+            <button type="" name="searchBook" class="btn btn-primary custom-button secondary-button">Buscar</button>
+        </div>
 
         <section>
             <div>
