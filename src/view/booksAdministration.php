@@ -53,6 +53,7 @@ if (isset($_GET['id'])) {
     <link rel="stylesheet" href="../../resources/styles.css">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@400;700&display=swap">
+    <link rel="stylesheet" href= "https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
     <style>
         .form-control {
             display: grid !important;
@@ -124,29 +125,31 @@ if (isset($_GET['id'])) {
         </div>
 
         <section>
-            <div>
-                <p>delete</p>
-                <p>edit</p>
-                <article>
-                    <?php if ($books) : ?>
-                        <?php foreach ($books as $book) : ?>
-                            <div class="col-md-3">
-                                <div class="card custom-card" style="width: 18rem;">
-                                    <img src="data:image/jpeg; base64,<?= base64_encode($book['image']) ?>" class="rounded-3 card-img-top py-3 px-5 " alt="Book Image">
-                                    <div class="card-body d-flex flex-column justify-content-center align-items-center">
-                                        <h4 class="card-title text-center"><?= $book['title'] ?></h4>
-                                        <p class="card-text text-center fw-bolder"><strong></strong> <?= $book['author'] ?></p>
-                                        <p class="card-text small text-center"><strong></strong> <?= $book['description'] ?></p>
-                                        <a href="../view/booksAdministration.php?id=<?= $book['id'] ?>" class="btn btn-danger rounded-3">Eliminar</a>
-                                        <a href="#" class="btn btn-success rounded-3">Editar</a>
+            <div class="container mt-5">
+                <div class="row g-4">
+                    <!--<p>delete</p>
+                    <p>edit</p>-->
+                        <?php if ($books) : ?>
+                            <?php foreach ($books as $book) : ?>
+                                <div class="col-md-3 mb-4">
+                                    <div class="card custom-card" style="width: 18rem;">
+                                        <img src="data:image/jpeg; base64,<?= base64_encode($book['image']) ?>" class="rounded-3 card-img-top py-3 px-5 " alt="Book Image">
+                                        <div class="card-body d-flex flex-column justify-content-center align-items-center">
+                                            <h4 class="card-title text-center"><?= $book['title'] ?></h4>
+                                            <p class="card-text text-center fw-bolder"><strong></strong> <?= $book['author'] ?></p>
+                                            <p class="card-text small text-center description"><strong></strong> <?= $book['description'] ?></p>
+                                            <div class="d-flex justify-content-between align-items-center w-90">
+                                                <a href="../view/booksAdministration.php?id=<?= $book['id'] ?>" class="btn btn-danger rounded-3 mx-1"><i class="fa fa-trash"></i> Eliminar</a>
+                                                <a href="#" class="btn btn-success rounded-3 mx-1"><i class="fa fa-edit"></i> Editar</a>
+                                            </div>
+                                        </div>
                                     </div>
                                 </div>
-                            </div>
-                        <?php endforeach; ?>
-                    <?php else : ?>
-                        <p>No hay libros en la base de datos.</p>
-                    <?php endif; ?>
-                </article>
+                            <?php endforeach; ?>
+                        <?php else : ?>
+                            <p class="col-12">No hay libros en la base de datos.</p>
+                        <?php endif; ?>
+                </div>
             </div>
         </section>
     </main>
