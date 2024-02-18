@@ -51,6 +51,7 @@ button.secondary-button {
     background-color: #8bca54;
     color: white;
     border-radius: 15px;
+    border: none;
 }
 
 input.custom-input{
