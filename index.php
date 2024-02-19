@@ -80,7 +80,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                             <p class="card-text text-center fw-bolder"><strong></strong> <?= $book['author'] ?></p>
                             <p class="card-text small text-center description"><strong></strong> <?= $book['description'] ?></p>
 
-                            <button href="#" class="btn btn-light rounded-3 primary-button custom-button">Ver más</button>
+                            <a href="src/view/bookDetails.php?id=<?= $book['id'] ?>" class="btn btn-light rounded-3 primary-button custom-button">Ver más</a>
                         </div>
                     </div>
                 </div>
