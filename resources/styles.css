@@ -50,8 +50,17 @@ button.secondary-button {
 .custom-button.primary-button {
     background-color: #8bca54;
     color: white;
+    text-decoration: none;
     border-radius: 15px;
     border: none;
+}
+
+.secondary-button-book {
+  background-color: #369df2;
+  color: white;
+  text-decoration: none;
+  border: none;
+  border-radius: 15px;
 }
 
 input.custom-input{
@@ -63,4 +72,35 @@ input.custom-input{
 
 .footer-color {
   background-color: #073060 !important;
+}
+
+/*ADMIN FORM STYLES*/
+
+.left-column {
+  width: 30em;
+}
+
+input.custom-input-form{
+  background-color: #d9d9d9; 
+  border-radius: 10px; 
+  border: none;
+  padding: 5px 10px;
+  width: 30em; 
+}
+
+.right-column {
+  width: 30em;
+}
+
+input.custom-input-image {
+  width: 30em;
+}
+
+textarea.custom-input-form{
+  background-color: #d9d9d9; 
+  border-radius: 10px; 
+  border: none;
+  padding: 5px 10px;
+  width: 30em;
+  height: 6.5em; 
 }
