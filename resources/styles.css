@@ -50,8 +50,17 @@ button.secondary-button {
 .custom-button.primary-button {
     background-color: #8bca54;
     color: white;
+    text-decoration: none;
     border-radius: 15px;
     border: none;
+}
+
+.secondary-button-book {
+  background-color: #369df2;
+  color: white;
+  text-decoration: none;
+  border: none;
+  border-radius: 15px;
 }
 
 input.custom-input{

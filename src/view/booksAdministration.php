@@ -197,8 +197,8 @@ switch ($action) {
                                         <p class="card-text text-center fw-bolder"><strong></strong> <?= $book['author'] ?></p>
                                         <p class="card-text small text-center description"><strong></strong> <?= $book['description'] ?></p>
                                         <div class="d-flex justify-content-between align-items-center w-90">
-                                            <a class="btn btn-danger rounded-3 mx-1" data-bs-toggle="modal" data-bs-target="#exampleModal<?= $book['id'] ?>"><i class="fa fa-trash"></i> Eliminar</a>
-                                            <a href="../view/booksAdministration.php?id=<?= $book['id'] ?>" class="btn btn-success rounded-3 mx-1"><i class="fa fa-edit"></i> Editar</a>
+                                            <a class="custom-button primary-button mx-1 py-2 px-3" data-bs-toggle="modal" data-bs-target="#exampleModal<?= $book['id'] ?>"><i class="fa fa-trash"></i> Eliminar</a>
+                                            <a href="../view/booksAdministration.php?id=<?= $book['id'] ?>" class="secondary-button-book mx-1 py-2 px-3"><i class="fa fa-edit"></i> Editar</a>
                                         </div>
 
                                         <!-- Modal -->
