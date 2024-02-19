@@ -44,7 +44,8 @@ class BooksController
 
             if (!empty($isbn) && !empty($title) && !empty($author) && !empty($image) && !empty($description)) {
                 $result = $this->model->addBook($isbn, $title, $author, $image, $description);
-                return header("Location: ../view/booksAdministration.php");
+                $success = 'Los datos fueron añadidos correctamente';
+                return header("Location: ../view/booksAdministration.php?success=" . urlencode($success));
             } else {
                 return 'Error al crear el libro';
             }
@@ -60,7 +61,8 @@ class BooksController
     public function editBook($id, $isbn, $title, $author, $image, $description)
     {
         $result = $this->model->editBook($id, $isbn, $title, $author, $image, $description);
+        $success = 'Los datos fueron editados correctamente';
 
-        return ($result) ? header("Location: ../view/booksAdministration.php") : 'error al Editar libro';
+        return ($result) ?  header("Location: ../view/booksAdministration.php?success=" . urlencode($success)): 'error al Editar libro';
     }
 }
