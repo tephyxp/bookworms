@@ -8,7 +8,6 @@ use Controller\UserController;
 session_start();
 
 if (!isset($_SESSION['user'])) {
-
     header("Location: ../../index.php");
     exit();
 }
@@ -18,51 +17,47 @@ if (isset($_POST['logout'])) {
     $userController->logout();
 }
 
+$booksController = new \Controller\BooksController();
+$bookId = isset($_GET['id']) ? $_GET['id'] : null;
 
-if (isset($_POST["addBook"])) {
-    if (empty($_POST["isbn"]) || empty($_POST["title"]) || empty($_POST["author"]) || empty($_FILES["image"]) || empty($_POST["description"])) {
-        $error = "Error! campos vacios";
+
+if (isset($_GET['action']) && $_GET['action'] === 'delete' && $bookId !== null) {
+    $result = $booksController->deleteBook($bookId);
+
+    if ($result) {
+        header("Location: ../view/booksAdministration.php");
+        exit();
     } else {
-        $isbn = $_POST["isbn"];
-        $title = $_POST["title"];
-        $author = $_POST["author"];
-        $image = file_get_contents($_FILES["image"]["tmp_name"]);
-        $description = $_POST["description"];
-
-        $newbook = new BooksController;
-
-        $newbook->addBook($isbn, $title, $author, $image, $description);
+        echo 'Error al eliminar el libro';
     }
 }
 
 $booksController = new BooksController();
 $books = $booksController->getBooks();
 
-if (isset($_GET['id'])) {
-    $booksController->deleteBook($_GET['id']);
+$bookId = isset($_GET['id']) ? $_GET['id'] : null;
+$bookDetails = null;
+
+
+if ($bookId !== null) {
+    $bookDetails = $booksController->getBookDetails($bookId);
 }
 
-$booksController = new \Controller\BooksController();
-
-$bookId = isset($_GET['id']) ? $_GET['id'] : null;
-
-$title = '';
-$author = '';
-$isbn = '';
-$image = '';
-$description = '';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    if ($bookId === null) {
+    if (isset($_POST['addBook'])) {
+        
         $result = $booksController->addBook($_POST['isbn'], $_POST['title'], $_POST['author'], $_FILES['image'], $_POST['description']);
-    } else {
+    } elseif (isset($_POST['editBook'])) {
+
         $result = $booksController->editBook($bookId, $_POST['isbn'], $_POST['title'], $_POST['author'], $_FILES['image'], $_POST['description']);
-    }
-    if ($result) {
-        header("Location: ../view/booksAdministration.php");
-        exit();
-    } else {
-        'Error al editar el libro';
+
+        if ($result) {
+            header("Location: ../view/booksAdministration.php");
+            exit();
+        } else {
+            echo 'Error al editar el libro';
+        }
     }
 }
 
@@ -98,54 +93,58 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             </div>
         </div>
         <form action="<?= $_SERVER['PHP_SELF'] ?>" method="post" enctype="multipart/form-data" class="form-control">
-            <div>
-                <label for="title" class="form-control">Titulo:
-                    <input class="form-control" type="text" name="title">
-                </label>
-                <label for="author">Autor:
-                    <input type="text" name="author">
-                </label>
-                <label for="isbn">ISBN:
-                    <input type="text" name="isbn"> </input>
-                </label>
-                <label for="image">Imagen:
-                    <input type="file" name="image"> </input>
-                </label>
-                <label for="description">Descripción:
-                    <textarea name="description"> </textarea>
-            </div>
-            <button type="submit" name="<?= ($bookId !== null) ? 'editBook' : 'addBook' ?>">
-        <?= ($bookId !== null) ? 'Guardar Cambios' : 'Añadir' ?>
-    </button>
-        </form>
+        <div>
+            <label for="title" class="form-control">Titulo:
+                <input class="form-control" type="text" name="title" value="<?= ($bookDetails !== null) ? $bookDetails['title'] : '' ?>">
+            </label>
+            <label for="author">Autor:
+                <input type="text" name="author" value="<?= ($bookDetails !== null) ? $bookDetails['author'] : '' ?>">
+            </label>
+            <label for="isbn">ISBN:
+                <input type="text" name="isbn" value="<?= ($bookDetails !== null) ? $bookDetails['isbn'] : '' ?>">
+            </label>
+            <label for="image">Imagen:
+                <input type="file" name="image">
+            </label>
+            <label for="description">Descripción:
+                <textarea name="description"><?= ($bookDetails !== null) ? $bookDetails['description'] : '' ?></textarea>
+            </label>
+        </div>
+        <button type="submit" name="<?= ($bookId !== null) ? 'editBook' : 'addBook' ?>">
+            <?= ($bookId !== null) ? 'Guardar Cambios' : 'Añadir' ?>
+        </button>
+    </form>
+
+        
 
         <input type="search" id="search" placeholder="Buscar..." />
         <button>Buscar</button>
 
         <section>
             <div>
-                <!-- <p>delete</p>
-                <p>edit</p> -->
-                <article>
-                    <?php if ($books) : ?>
-                        <?php foreach ($books as $book) : ?>
-                            <div class="col-md-3">
-                                <div class="card custom-card" style="width: 18rem;">
-                                    <img src="data:image/jpeg; base64,<?= base64_encode($book['image']) ?>" class="rounded-3 card-img-top py-3 px-5 " alt="Book Image">
-                                    <div class="card-body d-flex flex-column justify-content-center align-items-center">
-                                        <h4 class="card-title text-center"><?= $book['title'] ?></h4>
-                                        <p class="card-text text-center fw-bolder"><strong></strong> <?= $book['author'] ?></p>
-                                        <p class="card-text small text-center"><strong></strong> <?= $book['description'] ?></p>
-                                        <a href="../view/booksAdministration.php?id=<?= $book['id'] ?>" class="btn btn-danger rounded-3">Eliminar</a>
-                                        <a href="../view/booksAdministration.php?id=<?= $book['id'] ?>" class="btn btn-success rounded-3" class="btn btn-success rounded-3">Editar</a>
-                                    </div>
-                                </div>
-                            </div>
-                        <?php endforeach; ?>
-                    <?php else : ?>
-                        <p>No hay libros en la base de datos.</p>
-                    <?php endif; ?>
-                </article>
+
+            <article>
+    <?php if ($books) : ?>
+        <?php foreach ($books as $book) : ?>
+            <div class="col-md-3">
+                <div class="card custom-card" style="width: 18rem;">
+                    <img src="data:image/jpeg; base64,<?= base64_encode($book['image']) ?>" class="rounded-3 card-img-top py-3 px-5 " alt="portada del libro <?= $book['title'] ?>">
+                    <div class="card-body d-flex flex-column justify-content-center align-items-center">
+                        <h4 class="card-title text-center"><?= $book['title'] ?></h4>
+                        <p class="card-text text-center fw-bolder"><strong></strong> <?= $book['author'] ?></p>
+                        <p class="card-text small text-center"><strong></strong> <?= $book['description'] ?></p>
+                        <a href="../view/booksAdministration.php?action=delete&id=<?= $book['id'] ?>" class="btn btn-danger rounded-3">Eliminar</a>
+                        <a href="../view/booksAdministration.php?id=<?= $book['id'] ?>" class="btn btn-success rounded-3">Editar</a>
+                    </div>
+                </div>
+            </div>
+        <?php endforeach; ?>
+    <?php else : ?>
+        <p>No hay libros en la base de datos.</p>
+    <?php endif; ?>
+</article>
+
+
             </div>
         </section>
     </main>

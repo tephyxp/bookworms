@@ -15,13 +15,10 @@
             $this->PDO = $connectDB->connect();
         }
 
-        //traer todos los books
         public function getBooks()
         {
             $query = "SELECT * FROM books";
-             //preparar sentencia
             $stmt = $this->PDO->prepare($query);
-             //ejecutamos
             return ($stmt->execute()) ? $stmt->fetchAll(PDO::FETCH_ASSOC) : false;
         }
         
@@ -59,6 +56,7 @@
                 return false;
             }
         }
+        
 
         public function deleteBook($id) {
             $query = 'DELETE FROM books WHERE id = :id';
@@ -72,7 +70,7 @@
     }
         public function editBook($id, $isbn, $title, $author, $image, $description) {
             $query = "UPDATE books SET isbn = :isbn, title = :title, author = :author, image = :image, description = :description WHERE id = :id";
-            
+    
             $stmt = $this->PDO->prepare($query);
             $stmt->bindParam(':id', $id);
             $stmt->bindParam(':isbn', $isbn);
@@ -80,7 +78,8 @@
             $stmt->bindParam(':author', $author);
             $stmt->bindParam(':image', $image);
             $stmt->bindParam(':description', $description);
-        
-            return $stmt->execute();
-        }
+    
+        return $stmt->execute();
     }
+    }
+
