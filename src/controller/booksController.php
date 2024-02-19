@@ -42,4 +42,13 @@
         public function deleteBook($id) {
             return ($this->model->deleteBook($id)) ? header( "Location: ../view/booksAdministration.php") : 'error eliminar libro';
         }
-    }
+        
+        
+        public function editBook($id, $isbn, $title, $author, $image, $description) {
+            $result = $this->model->editBook($id, $isbn, $title, $author, $image, $description);
+        
+            return ($result) ? header( "Location: ../view/booksAdministration.php") : 'error al Editar libro';
+        }
+        }
+        
+
