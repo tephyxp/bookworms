@@ -6,7 +6,9 @@ require_once __DIR__ . "../../../vendor/autoload.php";
 
 $singleBook = new BooksController();
 
-$book = $singleBook->getBookDetails($_GET["id"]);
+$bookId = $_GET['id'];
+$bookController = new BooksController();
+$book = $bookController->getBookDetails($bookId);
 ?>
 
 <!doctype html>
