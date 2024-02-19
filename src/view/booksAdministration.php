@@ -18,7 +18,7 @@ if (isset($_POST['logout'])) {
 }
 
 $booksController = new BooksController();
-$bookId = isset($_GET['id']) ? $_GET['id'] : null;
+$bookId =  $_GET['id'] ?? null;
 
 $books = $booksController->getBooks();
 $bookDetails = null;
@@ -39,9 +39,19 @@ if (isset($_GET['action']) && $_GET['action'] === 'delete' && $bookId !== null) 
 }
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
+    unset($_SESSION['isbn'], $_SESSION['title'], $_SESSION['author'], $_SESSION['description']);
+}
+
+if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (isset($_POST["addBook"])) {
         if (empty($_POST["isbn"]) || empty($_POST["title"]) || empty($_POST["author"]) || empty($_FILES["image"]) || empty($_POST["description"])) {
-            $error = "Error! campos vacios";
+            $_SESSION['isbn'] = $_POST["isbn"];
+            $_SESSION['title'] = $_POST["title"];
+            $_SESSION['author'] = $_POST["author"];
+            $_SESSION['image'] = $_FILES["image"];
+            $_SESSION['description'] = $_POST["description"];
+
+            $error = "Error! Todos los campos son obligatorios.";
         } else {
             $isbn = $_POST["isbn"];
             $title = $_POST["title"];
@@ -66,7 +76,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $result = $booksController->editBook($bookId, $isbn, $title, $author, $image, $description);
 
         if ($result) {
-  
             exit();
         } else {
             echo 'Error al editar el libro';
@@ -109,7 +118,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <main>
         <h1 class="m-3 text-center my-5 first-title">BOOKWORMS</h1>
         <div class="row">
-            <div class="col-sm-12">
+            <div class="d-flex justify-content-around mx-2 col-sm-12">
                 <?php if (isset($error)) : ?>
                     <div class="alert alert-danger alert-dismissible fade show" role="alert">
                         <strong><?php echo $error; ?></strong>
@@ -131,29 +140,30 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
                     <div class="mb-2">
                         <label for="title">Titulo:
-                            <input class="form-control custom-input-form mb-2" type="text" name="title" value="<?= ($bookDetails !== null) ? $bookDetails['title'] : '' ?>">
+                            <input class="form-control custom-input-form mb-2" type="text" name="title" value="<?= (isset($_SESSION['title'])) ? $_SESSION['title'] : (($bookDetails !== null) ? $bookDetails['title'] : '') ?>">
+
                         </label>
                     </div>
                     <div class="mb-2">
                         <label for="author">Autor:
-                            <input type="text" name="author" value="<?= ($bookDetails !== null) ? $bookDetails['author'] : '' ?>" class="custom-input-form form-control mb-2">
+                            <input type="text" name="author" value="<?= (isset($_SESSION['author'])) ? $_SESSION['author'] : (($bookDetails !== null) ? $bookDetails['author'] : '') ?>" class="custom-input-form form-control mb-2">
                         </label>
                     </div>
                     <div class="mb-2">
                         <label for="isbn">ISBN:
-                            <input type="text" name="isbn" value="<?= ($bookDetails !== null) ? $bookDetails['isbn'] : '' ?>" class="custom-input-form form-control mb-2" />
+                            <input type="text" name="isbn" value="<?= (isset($_SESSION['isbn'])) ? $_SESSION['isbn'] : (($bookDetails !== null) ? $bookDetails['isbn'] : '') ?>" class="custom-input-form form-control mb-2" />
                         </label>
                     </div>
                 </div>
                 <div class="right-column">
                     <div class="mb-2">
                         <label for="image" class="custom-input-image">Imagen:
-                            <input type="file" name="image" class="mb-2 form-control custom-input-image " />
+                            <input type="file" name="image" class="mb-2 form-control custom-input-image " value="<?= (isset($_SESSION['image'])) ? $_SESSION['image'] : ''  ?>" />
                         </label>
                     </div>
                     <div class="mb-2">
                         <label for="description">Descripción:
-                            <textarea name="description" class="custom-input-form form-control mb-2"><?= ($bookDetails !== null) ? $bookDetails['description'] : '' ?></textarea>
+                            <textarea name="description" class="custom-input-form form-control mb-2"><?= (isset($_SESSION['description'])) ? $_SESSION['description'] : (($bookDetails !== null) ? $bookDetails['description'] : '')?></textarea>
                         </label>
                     </div>
                 </div>
