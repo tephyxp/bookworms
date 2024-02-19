@@ -23,11 +23,9 @@ $bookId = isset($_GET['id']) ? $_GET['id'] : null;
 $books = $booksController->getBooks();
 $bookDetails = null;
 
-
 if ($bookId !== null) {
     $bookDetails = $booksController->getBookDetails($bookId);
 }
-
 
 if (isset($_GET['action']) && $_GET['action'] === 'delete' && $bookId !== null) {
     $result = $booksController->deleteBook($bookId);
@@ -39,8 +37,6 @@ if (isset($_GET['action']) && $_GET['action'] === 'delete' && $bookId !== null) 
         echo 'Error al eliminar el libro';
     }
 }
-
-
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (isset($_POST["addBook"])) {
@@ -61,19 +57,17 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             exit();
         }
     } elseif (isset($_POST['editBookSubmit'])) {
-
         $isbn = $_POST['isbn'];
         $title = $_POST['title'];
         $author = $_POST['author'];
         $image = file_get_contents($_FILES["image"]["tmp_name"]);
         $description = $_POST['description'];
 
-
         $bookId = $_POST['bookId'];
         $result = $booksController->editBook($bookId, $isbn, $title, $author, $image, $description);
 
         if ($result) {
-            header("Location: ../view/booksAdministration.php");
+            header("Location: ../view/booksAdministration.php?editSuccess=true");
             exit();
         } else {
             echo 'Error al editar el libro';
@@ -90,9 +84,7 @@ switch ($action) {
         $error = 'Libro no encontrado';
         break;
 }
-
 ?>
-
 
 <html lang="es">
 
@@ -121,6 +113,7 @@ switch ($action) {
             <input type="submit" name="logout" value="Cerrar Sesion" class="btn btn-primary mb-3 secondary-button">
         </form>
     </header>
+
     <main>
         <h1 class="m-3 text-center my-5 first-title">BOOKWORMS</h1>
         <div class="row">
@@ -133,6 +126,18 @@ switch ($action) {
                 <?php endif; ?>
             </div>
         </div>
+
+        <?php
+        // Agregar verificación para mostrar el mensaje de edición exitosa
+        $editSuccessMessage = isset($_GET['editSuccess']) ? "El libro ha sido editado correctamente" : "";
+        ?>
+        <?php if (!empty($editSuccessMessage)) : ?>
+            <div class="alert alert-success alert-dismissible fade show" role="alert">
+                <?php echo $editSuccessMessage; ?>
+                <button type="button" class="btn-close" data-bs-dismiss="alert" aria-label="Close"></button>
+            </div>
+        <?php endif; ?>
+
         <form action="<?= $_SERVER['PHP_SELF'] ?>" method="post" enctype="multipart/form-data">
             <div class="d-flex justify-content-around">
                 <div class="left-column">
@@ -186,7 +191,6 @@ switch ($action) {
         <section>
             <div class="container mt-5">
                 <div class="row g-4">
-
                     <?php if ($books) : ?>
                         <?php foreach ($books as $book) : ?>
                             <div class="col-md-3 mb-4">
@@ -197,7 +201,7 @@ switch ($action) {
                                         <p class="card-text text-center fw-bolder"><strong></strong> <?= $book['author'] ?></p>
                                         <p class="card-text small text-center description"><strong></strong> <?= $book['description'] ?></p>
                                         <div class="d-flex justify-content-between align-items-center w-90">
-                                            <a class="custom-button primary-button mx-1 py-2 px-3" data-bs-toggle="modal" data-bs-target="#exampleModal<?= $book['id'] ?>"><i class="fa fa-trash"></i> Eliminar</a>
+                                            <a class="btn btn-danger rounded-4 mx-1 py-2 px-3" data-bs-toggle="modal" data-bs-target="#exampleModal<?= $book['id'] ?>"><i class="fa fa-trash"></i> Eliminar</a>
                                             <a href="../view/booksAdministration.php?id=<?= $book['id'] ?>" class="secondary-button-book mx-1 py-2 px-3"><i class="fa fa-edit"></i> Editar</a>
                                         </div>
 
@@ -219,10 +223,7 @@ switch ($action) {
                                                 </div>
                                             </div>
                                         </div>
-
-
                                     </div>
-
                                 </div>
                             </div>
                         <?php endforeach; ?>
@@ -234,7 +235,10 @@ switch ($action) {
         </section>
     </main>
 
-
     <?php
     require_once __DIR__ . '/head/footer.php';
     ?>
+
+</body>
+
+</html>
