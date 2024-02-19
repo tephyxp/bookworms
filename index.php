@@ -7,25 +7,36 @@ use Controller\BooksController;
 use Controller\UserController;
 
 
-    $booksController = new BooksController();
-    $books = $booksController->getBooks();
-    
+$booksController = new BooksController();
+$page=isset($_GET['page']) ? $_GET['page'] : 1 ;
+$limit = 8;
+$totalBooks = $booksController->getTotalBooks();
+$numberOfPages = ceil($totalBooks / $limit);
+$startFrom = ($numberOfPages - 1) * $limit;
+$books = $booksController->getBooks($limit);
+
+
+
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $userController = new UserController;
     $userController->login();
 }
 
-    $action = isset($_GET['action']) ? $_GET['action'] : 'search';
-    switch ($action) {
-        case 'search':
-            $books = $booksController->searchBooks();
-            break;
-            default:
-            echo "404 Página no encontrada";
-            break;
-        }
-        
+$action = isset($_GET['action']) ? $_GET['action'] : 'search';
+switch ($action) {
+    case 'search':
+        $books = $booksController->searchBooks();
+        break;
+    default:
+        echo "404 Página no encontrada";
+        break;
+}
+
+echo $totalBooks;
+echo $numberOfPages;
+echo $startFrom;
+
 
 ?>
 
@@ -59,7 +70,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <section class="d-flex justify-content-center">
         <form class="row g-3 m-2" action="?action=search" method="get">
             <div class="col-auto">
-                
+
                 <input type="text" name="keyword" class="form-control custom-input" id="inputPassword2" placeholder="Buscar">
             </div>
             <div class="col-auto">
@@ -67,31 +78,38 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             </div>
         </form>
     </section>
-        
-    <div class="container mt-5">
-    <div class="row g-4">
-        <?php if ($books) : ?>
-            <?php foreach ($books as $book) : ?>
-                <div class="col-md-3">
-                    <div class="card custom-card" style="width: 18rem;">
-                        <img src="data:image/jpeg; base64,<?= base64_encode($book['image']) ?>" class="rounded-3 card-img-top py-3 px-5 " alt="Book Image">
-                        <div class="card-body d-flex flex-column justify-content-center align-items-center">
-                            <h4 class="card-title text-center custom-title"><?= $book['title'] ?></h4>
-                            <p class="card-text text-center fw-bolder"><strong></strong> <?= $book['author'] ?></p>
-                            <p class="card-text small text-center description"><strong></strong> <?= $book['description'] ?></p>
 
-                            <button href="#" class="btn btn-light rounded-3 primary-button custom-button">Ver más</button>
+    <div class="container mt-5">
+        <div class="pagination">
+            <?php
+                for($i=1; $i<$numberOfPages; $i++){
+                    echo "<a href='?page=$i'>$i<a/>";
+                }
+            ?>
+        </div>
+        <div class="row g-4">
+            <?php if ($books) : ?>
+                <?php foreach ($books as $book) : ?>
+                    <div class="col-md-3">
+                        <div class="card custom-card" style="width: 18rem;">
+                            <img src="data:image/jpeg; base64,<?= base64_encode($book['image']) ?>" class="rounded-3 card-img-top py-3 px-5 " alt="Book Image">
+                            <div class="card-body d-flex flex-column justify-content-center align-items-center">
+                                <h4 class="card-title text-center custom-title"><?= $book['title'] ?></h4>
+                                <p class="card-text text-center fw-bolder"><strong></strong> <?= $book['author'] ?></p>
+                                <p class="card-text small text-center description"><strong></strong> <?= $book['description'] ?></p>
+
+                                <button href="#" class="btn btn-light rounded-3 primary-button custom-button">Ver más</button>
+                            </div>
                         </div>
                     </div>
-                </div>
-            <?php endforeach; ?>
-        <?php else : ?>
-            <p>No hay libros en la base de datos.</p>
-        <?php endif; ?>
+                <?php endforeach; ?>
+            <?php else : ?>
+                <p>No hay libros en la base de datos.</p>
+            <?php endif; ?>
+        </div>
     </div>
-</div>
 
 
-        <?php
-        require_once __DIR__ . '/src/view/head/footer.php';
-        ?>
+    <?php
+    require_once __DIR__ . '/src/view/head/footer.php';
+    ?>
