@@ -64,3 +64,34 @@ input.custom-input{
 .footer-color {
   background-color: #073060 !important;
 }
+
+/*ADMIN FORM STYLES*/
+
+.left-column {
+  width: 30em;
+}
+
+input.custom-input-form{
+  background-color: #d9d9d9; 
+  border-radius: 10px; 
+  border: none;
+  padding: 5px 10px;
+  width: 30em; 
+}
+
+.right-column {
+  width: 30em;
+}
+
+input.custom-input-image {
+  width: 30em;
+}
+
+textarea.custom-input-form{
+  background-color: #d9d9d9; 
+  border-radius: 10px; 
+  border: none;
+  padding: 5px 10px;
+  width: 30em;
+  height: 6.5em; 
+}
