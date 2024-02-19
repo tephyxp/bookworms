@@ -100,7 +100,7 @@ if (isset($_GET['id'])) {
                             </label>
                         </div>
                     </div>
-                    <div class="col-md-6">
+                    <div class="col-md-6 ">
                         <div class="mb-2">
                             <label for="image">Imagen:
                                 <input type="file" name="image" class="mb-2 form-control"> </input>
