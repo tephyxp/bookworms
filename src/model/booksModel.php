@@ -24,7 +24,6 @@ class booksModel
         $stmt -> bindParam(':limit',$limit, PDO::PARAM_INT);
         $stmt -> bindParam( ':from' , $startFrom, PDO::PARAM_INT ); 
 
-
         //ejecutamos
         return ($stmt->execute()) ? $stmt->fetchAll(PDO::FETCH_ASSOC) : false;
     }
