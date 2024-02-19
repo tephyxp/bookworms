@@ -46,8 +46,14 @@
         
         public function editBook($id, $isbn, $title, $author, $image, $description) {
             $result = $this->model->editBook($id, $isbn, $title, $author, $image, $description);
+            
+            // Redireccionamos a la página de visualización del libro con los nuevos datos
+            // header("Location: ../view/bookDetails.php?id=".$id);
+            
+            
+            // editBook($id, $isbn, $title, $author, $image, $description);
         
-            return $result;
+            return ($result) ? header( "Location: ../view/bookDetails.php?id=".$id) : 'error al Editar libro';
         }
         }
         

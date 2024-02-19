@@ -79,7 +79,11 @@
             $stmt->bindParam(':image', $image);
             $stmt->bindParam(':description', $description);
     
-        return $stmt->execute();
+            if($stmt->execute()){
+                return true;
+            }else{
+                die('error'. $stmt->errorInfo()[2]);
+            };
     }
     }
 
