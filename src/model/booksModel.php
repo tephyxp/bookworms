@@ -34,7 +34,7 @@ class booksModel
         $stmt = $this->PDO->prepare($query);
         $stmt->bindParam(':limit', $limit, PDO::PARAM_INT);
         $stmt->bindParam(':offset', $offset, PDO::PARAM_INT);
-
+    
         return ($stmt->execute()) ? $stmt->fetchAll(PDO::FETCH_ASSOC) : false;
     }
 

@@ -32,7 +32,7 @@ class BooksController
         return ($this->model->getBookDetails($id) != false) ? $this->model->getBookDetails($id) : 'El libro no existe';
     }
 
-    public function searchBooks()
+    public function searchBooks($keyword)
     {
         $keyword = isset($_GET['keyword']) ? $_GET['keyword'] : '';
         return  $this->model->searchBooks($keyword);

@@ -6,37 +6,26 @@ require_once __DIR__ . "/vendor/autoload.php";
 use Controller\BooksController;
 use Controller\UserController;
 
-
 $booksController = new BooksController();
-
-$page=isset($_GET['page']) ? intval($_GET['page']) : 1 ;
-$limit = 4;
-$totalBooks = $booksController -> getTotalBooks();
-$numberOfPages = ceil($totalBooks / $limit);
-
-$books = $booksController->getBooksPagination($page, $limit);
-
-
-
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $userController = new UserController;
     $userController->login();
 }
 
-$action = isset($_GET['action']) ? $_GET['action'] : 'search';
-switch ($action) {
-    case 'search':
-        $books = $booksController->searchBooks();
-        break;
-    default:
-        echo "404 Página no encontrada";
-        break;
+$page = isset($_GET['page']) ? intval($_GET['page']) : 1;
+$limit = 8;
+$totalBooks = $booksController->getTotalBooks();
+$numberOfPages = ceil($totalBooks / $limit);
+
+$searchKeyword = isset($_GET['keyword']) ? $_GET['keyword'] : '';
+$books = [];
+
+if (!empty($searchKeyword)) {
+    $books = $booksController->searchBooks($searchKeyword);
+} else {
+    $books = $booksController->getBooksPagination($page, $limit);
 }
-
-echo $totalBooks;
-echo $numberOfPages;
-
 
 
 ?>
