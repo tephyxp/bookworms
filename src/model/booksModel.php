@@ -15,15 +15,12 @@ class booksModel
         $this->PDO = $connectDB->connect();
     }
 
-    //traer todos los books
+    
     public function getBooks()
     {
         $query = "SELECT * FROM books";
-        //preparar sentencia
         $stmt = $this->PDO->prepare($query);
 
-
-        //ejecutamos
         return ($stmt->execute()) ? $stmt->fetchAll(PDO::FETCH_ASSOC) : false;
     }
 
