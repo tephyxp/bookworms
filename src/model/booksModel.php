@@ -21,10 +21,20 @@ class booksModel
         $query = "SELECT * FROM books";
         //preparar sentencia
         $stmt = $this->PDO->prepare($query);
-        $stmt -> bindParam(':limit',$limit, PDO::PARAM_INT);
-        $stmt -> bindParam( ':from' , $startFrom, PDO::PARAM_INT ); 
+
 
         //ejecutamos
+        return ($stmt->execute()) ? $stmt->fetchAll(PDO::FETCH_ASSOC) : false;
+    }
+
+    public function getBooksPagination($page, $limit)
+    {
+        $offset = ($page - 1) * $limit;
+        $query = "SELECT * FROM books LIMIT :limit OFFSET :offset";
+        $stmt = $this->PDO->prepare($query);
+        $stmt->bindParam(':limit', $limit, PDO::PARAM_INT);
+        $stmt->bindParam(':offset', $offset, PDO::PARAM_INT);
+
         return ($stmt->execute()) ? $stmt->fetchAll(PDO::FETCH_ASSOC) : false;
     }
 
@@ -85,5 +95,23 @@ class booksModel
         } else {
             die('error' . $stmt->errorInfo()[2]);
         }
+    }
+    public function editBook($id, $isbn, $title, $author, $image, $description)
+    {
+        $query = "UPDATE books SET isbn = :isbn, title = :title, author = :author, image = :image, description = :description WHERE id = :id";
+
+        $stmt = $this->PDO->prepare($query);
+        $stmt->bindParam(':id', $id);
+        $stmt->bindParam(':isbn', $isbn);
+        $stmt->bindParam(':title', $title);
+        $stmt->bindParam(':author', $author);
+        $stmt->bindParam(':image', $image);
+        $stmt->bindParam(':description', $description);
+
+        if ($stmt->execute()) {
+            return true;
+        } else {
+            die('error' . $stmt->errorInfo()[2]);
+        };
     }
 }

@@ -8,12 +8,13 @@ use Controller\UserController;
 
 
 $booksController = new BooksController();
-$page=isset($_GET['page']) ? $_GET['page'] : 1 ;
-$limit = 8;
-$totalBooks = $booksController->getTotalBooks();
+
+$page=isset($_GET['page']) ? intval($_GET['page']) : 1 ;
+$limit = 4;
+$totalBooks = $booksController -> getTotalBooks();
 $numberOfPages = ceil($totalBooks / $limit);
-$startFrom = ($numberOfPages - 1) * $limit;
-$books = $booksController->getBooks($limit);
+
+$books = $booksController->getBooksPagination($page, $limit);
 
 
 
@@ -35,7 +36,7 @@ switch ($action) {
 
 echo $totalBooks;
 echo $numberOfPages;
-echo $startFrom;
+
 
 
 ?>
@@ -80,14 +81,14 @@ echo $startFrom;
     </section>
 
     <div class="container mt-5">
-        <div class="pagination">
-            <?php
-                for($i=1; $i<$numberOfPages; $i++){
-                    echo "<a href='?page=$i'>$i<a/>";
-                }
-            ?>
-        </div>
-        <div class="row g-4">
+        <ul class="pagination">
+            <?php for ($i = 1; $i <= $numberOfPages; $i++) : ?>
+                <li class="page-item <?= ($i == $page) ? 'active' : '' ?>">
+                    <a class="page-link" href="?page=<?= $i ?>"><?= $i ?></a>
+                </li>
+            <?php endfor; ?>
+        </ul>
+            <div class="row g-4">
             <?php if ($books) : ?>
                 <?php foreach ($books as $book) : ?>
                     <div class="col-md-3">
@@ -98,16 +99,16 @@ echo $startFrom;
                                 <p class="card-text text-center fw-bolder"><strong></strong> <?= $book['author'] ?></p>
                                 <p class="card-text small text-center description"><strong></strong> <?= $book['description'] ?></p>
 
-                                <button href="#" class="btn btn-light rounded-3 primary-button custom-button">Ver más</button>
-                            </div>
+                            <a href="src/view/bookDetails.php?id=<?= $book['id'] ?>" class="btn btn-light rounded-3 primary-button custom-button">Ver más</a>
                         </div>
                     </div>
-                <?php endforeach; ?>
-            <?php else : ?>
-                <p>No hay libros en la base de datos.</p>
-            <?php endif; ?>
-        </div>
+                </div>
+            <?php endforeach; ?>
+        <?php else : ?>
+            <p>No hay libros en la base de datos.</p>
+        <?php endif; ?>
     </div>
+</div>
 
 
     <?php

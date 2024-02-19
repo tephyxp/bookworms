@@ -18,9 +18,13 @@ class BooksController
         return ($this->model->getBooks()) ? $this->model->getBooks() : 'No hay libros en la base de datos';
     }
 
-    public function getTotalBooks()
+    public function getTotalBooks(){
+        return ($this ->model->getTotalBooks()  > 0) ? $this->model->getTotalBooks() : 'No hay libros en la base de datos';
+    }
+
+    public function getBooksPagination($page, $limit)
     {
-        return ($this->model->getTotalBooks());
+        return ($this->model->getBooksPagination($page, $limit)) ? $this->model->getBooksPagination($page, $limit) : 'No hay libros en la base de datos';
     }
 
     public function getBookDetails($id)
@@ -50,5 +54,13 @@ class BooksController
     public function deleteBook($id)
     {
         return ($this->model->deleteBook($id)) ? header("Location: ../view/booksAdministration.php") : 'error eliminar libro';
+    }
+
+
+    public function editBook($id, $isbn, $title, $author, $image, $description)
+    {
+        $result = $this->model->editBook($id, $isbn, $title, $author, $image, $description);
+
+        return ($result) ? header("Location: ../view/booksAdministration.php") : 'error al Editar libro';
     }
 }
