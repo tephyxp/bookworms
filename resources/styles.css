@@ -16,8 +16,8 @@
 .description {
   display: -webkit-box;
   -webkit-box-orient: vertical;
-  -webkit-line-clamp: 4; 
-  line-clamp: 4;
+  -webkit-line-clamp: 3; 
+  line-clamp: 3;
   overflow: hidden;
 }
 
@@ -63,4 +63,10 @@ input.custom-input{
 
 .footer-color {
   background-color: #073060 !important;
+}
+
+/* BOOK ADMIN STYLES */
+
+.form-control {
+  display: grid !important;
 }
