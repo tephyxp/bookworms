@@ -81,16 +81,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 }
 
-    $action = isset($_GET['action']) ? $_GET['action'] : 'search';
-    switch ($action) {
-        case 'search':
-            $books = $booksController->searchBooks();
-            break;
-            default:
-            $error= 'Libro no encontrado';
-            break;
-        }
-
+    $searchKeyword = isset($_GET['keyword']) ? $_GET['keyword'] : '';
+    $books = $booksController->searchBooks($searchKeyword);
 ?>
 
 
