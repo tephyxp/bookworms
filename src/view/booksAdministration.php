@@ -42,7 +42,6 @@ if (isset($_GET['action']) && $_GET['action'] === 'delete' && $bookId !== null) 
 
 
 
-
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (isset($_POST["addBook"])) {
         if (empty($_POST["isbn"]) || empty($_POST["title"]) || empty($_POST["author"]) || empty($_FILES["image"]) || empty($_POST["description"])) {
@@ -82,6 +81,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     }
 }
 
+    $action = isset($_GET['action']) ? $_GET['action'] : 'search';
+    switch ($action) {
+        case 'search':
+            $books = $booksController->searchBooks();
+            break;
+            default:
+            $error= 'Libro no encontrado';
+            break;
+        }
+
 ?>
 
 
@@ -105,7 +114,9 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
     <body class="custom-bd">
         <header class="my-3 mx-5 d-flex justify-content-between align-items-center">
-            <img src="../../resources/img/bookworms.png" alt="Logo" class="logo">
+            <a href="../../index.php">
+                <img src="../../resources/img/bookworms.png" alt="Logo" class="logo">
+            </a>
             <form action="" method="post">
                 <input type="submit" name="logout" value="Cerrar Sesion" class="btn btn-primary mb-3 secondary-button">
             </form>
@@ -163,10 +174,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                 </div>
             </form>
 
-            <div class="col-md-12 text-center mt-4">
-                <input type="search" id="search" placeholder="Buscar..." class="custom-input mt-3" />
-                <button type="" name="searchBook" class="btn btn-primary custom-button secondary-button">Buscar</button>
-            </div>
+            <section class="d-flex justify-content-center">
+                <form class="row g-3 m-2" action="?action=search" method="get">
+                    <div class="col-auto">
+                        <input type="text" name="keyword" class="form-control custom-input" placeholder="Buscar">
+                    </div>
+                    <div class="col-auto">
+                        <button type="submit" class="btn btn-primary mb-3 secondary-button">Buscar </button>
+                    </div>
+                </form>
+            </section>
 
             <section>
                 <div class="container mt-5">
@@ -182,38 +199,37 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
                                                 <p class="card-text text-center fw-bolder"><strong></strong> <?= $book['author'] ?></p>
                                                 <p class="card-text small text-center description"><strong></strong> <?= $book['description'] ?></p>
                                                 <div class="d-flex justify-content-between align-items-center w-90">
-                                                    <a href="../view/booksAdministration.php?id=<?= $book['id'] ?>" class="btn btn-danger rounded-3 mx-1" data-bs-toggle="modal" data-bs-target="#exampleModal"><i class="fa fa-trash"></i> Eliminar</a>
+                                                    <a class="btn btn-danger rounded-3 mx-1" data-bs-toggle="modal" data-bs-target="#exampleModal<?= $book['id'] ?>"><i class="fa fa-trash"></i> Eliminar</a>
                                                     <a href="../view/booksAdministration.php?id=<?= $book['id'] ?>" class="btn btn-success rounded-3 mx-1"><i class="fa fa-edit"></i> Editar</a>
+                                                </div>
 
-                                                    <!-- <a class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#exampleModal">Eliminar</a> -->
-
-                                                    <!-- Modal -->
-                                                    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                                <!-- Modal -->
+                                                <div class="modal fade" id="exampleModal<?= $book['id'] ?>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                                                     <div class="modal-dialog">
                                                         <div class="modal-content">
-                                                        <div class="modal-header">
-                                                            <h5 class="modal-title" id="exampleModalLabel">¿Desea eliminar el registro?</h5>
-                                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                            <div class="modal-header">
+                                                                <h5 class="modal-title" id="exampleModalLabel">¿Desea eliminar el Libro <?= $book['title'] ?> de <?= $book['author'] ?>  ?</h5>
+                                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                                            </div>
+                                                            <div class="modal-body">
+                                                                Una vez eliminado no se podrá recuperar el registro
+                                                            </div>
+                                                            <div class="modal-footer">
+                                                                <button type="button" class="btn btn-success" data-bs-dismiss="modal">Cerrar</button>
+                                                                <a href="../view/booksAdministration.php?action=delete&id=<?= $book['id'] ?>" class="btn btn-danger">Eliminar</a>
+                                                            </div>
                                                         </div>
-                                                        <div class="modal-body">
-                                                            Una vez eliminado no se podra recuperar el registro
-                                                        </div>
-                                                        <div class="modal-footer">
-                                                            <button type="button" class="btn btn-success" data-bs-dismiss="modal">Cerrar</button>
-                                                            <a href="../view/booksAdministration.php?id=<?= $book['id'] ?>" class="btn btn-danger">Eliminar</a>
-                                                            <!-- <button type="button" >Eliminar</button> -->
-                                                        </div>
-                                                        </div>
-                                                    </div>
                                                     </div>
                                                 </div>
+                                            
+
                                             </div>
                                             
                                         </div>
                                     </div>
                                 <?php endforeach; ?>
                             <?php else : ?>
-                                <p class="col-12">No hay libros en la base de datos.</p>
+                                <p class="col-12"><?php echo $error ?></p>
                             <?php endif; ?>
                     </div>
                 </div>
@@ -221,4 +237,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         </main>
 
 
-
+        <?php
+        require_once __DIR__ . '/head/footer.php';
+        ?>
