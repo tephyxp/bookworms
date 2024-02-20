@@ -58,3 +58,7 @@ Deberán desarrollar una web utilizando PHP con una arquitectura MVC, con conexi
       ![image](https://github.com/tephyxp/bookworms/assets/135736563/8725a3af-c5ea-47a3-93bd-c327e8c78c01)
 
 4. Ademas, debes crear un archivo .env en la base de los archivos y modificar las variables segun uses XAMPP o MAMP.
+     DDBB_HOST="localhost";
+     DDBB_USER="user";
+     DDBB_PASSWORD="password";
+     DDBB_NAME="bookworms_library";
