@@ -3,11 +3,11 @@
 ## 🌟 Developers 🌟
 
 [Laura Gil, Product Owner](https://github.com/ImLauraGS) <br>
-[Steph Céspedes, Fullstack Developer](https://github.com) <br>
-[Vicki Robertson, Fullstack Developer](https://github.com/) <br>
-[Laura Artaza, Fullstack Developer](https://github.com/) <br>
-[Melissa Casola, Fullstack Developer](https://github.com) <br>
-[Zohra Bellamine, Scrum Master](https://github.com) <br>
+[Steph Céspedes, Fullstack Developer](https://github.com/tephyxp) <br>
+[Vicki Robertson, Fullstack Developer](https://github.com/vicki-robertson) <br>
+[Laura Artaza, Fullstack Developer](https://github.com/lolamindi) <br>
+[Melissa Casola, Fullstack Developer](https://github.com/melitacasola) <br>
+[Zohra Bellamine, Scrum Master](https://github.com/zohra-b) <br>
 
 
 ## 🌈 Información General 🌈
