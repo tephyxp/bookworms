@@ -55,4 +55,6 @@ Deberán desarrollar una web utilizando PHP con una arquitectura MVC, con conexi
 3. Crea la base de datos y la tabla:
     - Crea una base de datos llamada: bookworms_library
     - Importa el siguiente archivo: [Descargar archivo ZIP](/resources/imgReadme/bookworms_library.sql.zip)
+      ![image](https://github.com/tephyxp/bookworms/assets/135736563/8725a3af-c5ea-47a3-93bd-c327e8c78c01)
+
 4. Ademas, debes crear un archivo .env en la base de los archivos y modificar las variables segun uses XAMPP o MAMP.
