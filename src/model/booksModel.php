@@ -13,6 +13,8 @@ class booksModel
     {
         $connectDB = new Database;
         $this->PDO = $connectDB->connect();
+
+        $this->PDO->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
     }
 
     
@@ -83,16 +85,21 @@ class booksModel
     }
 
     public function deleteBook($id)
-    {
-        $query = 'DELETE FROM books WHERE id = :id';
-        $stmt = $this->PDO->prepare($query);
-        $stmt->bindParam(':id', $id, PDO::PARAM_INT);
-        if ($stmt->execute()) {
-            return true;
-        } else {
-            die('error' . $stmt->errorInfo()[2]);
-        }
+{
+    $query = 'DELETE FROM books WHERE id = :id';
+    $stmt = $this->PDO->prepare($query);
+    $stmt->bindParam(':id', $id, PDO::PARAM_INT);
+
+    if ($stmt->execute()) {
+        return true;
+    } else {
+        $errorInfo = $stmt->errorInfo();
+        error_log("Delete failed for ID $id: " . print_r($errorInfo, true));
+        return false;
     }
+
+    }
+    
     public function editBook($id, $isbn, $title, $author, $image, $description)
     {
         $query = "UPDATE books SET isbn = :isbn, title = :title, author = :author, image = :image, description = :description WHERE id = :id";

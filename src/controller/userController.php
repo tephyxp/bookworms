@@ -34,7 +34,7 @@ class UserController {
                     }
 
                 }
-            echo  "Usuario o contraseña incorrecta";
+            echo  "Username or password incorrect";
 
             }
         }

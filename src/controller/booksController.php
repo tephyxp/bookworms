@@ -15,21 +15,21 @@ class BooksController
 
     public function getBooks()
     {
-        return ($this->model->getBooks()) ? $this->model->getBooks() : 'No hay libros en la base de datos';
+        return ($this->model->getBooks()) ? $this->model->getBooks() : 'There are no books in the database';
     }
 
     public function getTotalBooks(){
-        return ($this ->model->getTotalBooks()  > 0) ? $this->model->getTotalBooks() : 'No hay libros en la base de datos';
+        return ($this ->model->getTotalBooks()  > 0) ? $this->model->getTotalBooks() : 'There are no books in the database';
     }
 
     public function getBooksPagination($page, $limit)
     {
-        return ($this->model->getBooksPagination($page, $limit)) ? $this->model->getBooksPagination($page, $limit) : 'No hay libros en la base de datos';
+        return ($this->model->getBooksPagination($page, $limit)) ? $this->model->getBooksPagination($page, $limit) : 'There are no books in the database';
     }
 
     public function getBookDetails($id)
     {
-        return ($this->model->getBookDetails($id) != false) ? $this->model->getBookDetails($id) : 'El libro no existe';
+        return ($this->model->getBookDetails($id) != false) ? $this->model->getBookDetails($id) : 'This book is not on file';
     }
 
     public function searchBooks($keyword)
@@ -44,25 +44,25 @@ class BooksController
 
             if (!empty($isbn) && !empty($title) && !empty($author) && !empty($image) && !empty($description)) {
                 $result = $this->model->addBook($isbn, $title, $author, $image, $description);
-                $success = 'Los datos fueron añadidos correctamente';
+                $success = 'The details were added correctly';
                 return header("Location: ../view/booksAdministration.php?success=" . urlencode($success));
             } else {
-                return 'Error al crear el libro';
+                return 'Error creating the book';
             }
         }
     }
 
     public function deleteBook($id)
     {
-        return ($this->model->deleteBook($id)) ? header("Location: ../view/booksAdministration.php") : 'error eliminar libro';
+        return ($this->model->deleteBook($id)) ? header("Location: ../view/booksAdministration.php") : 'Error deleting the book';
     }
 
 
     public function editBook($id, $isbn, $title, $author, $image, $description)
     {
         $result = $this->model->editBook($id, $isbn, $title, $author, $image, $description);
-        $success = 'Los datos fueron editados correctamente';
+        $success = 'The details were edited correctly';
 
-        return ($result) ?  header("Location: ../view/booksAdministration.php?success=" . urlencode($success)): 'error al Editar libro';
+        return ($result) ?  header("Location: ../view/booksAdministration.php?success=" . urlencode($success)): 'Error editing the book';
     }
 }
