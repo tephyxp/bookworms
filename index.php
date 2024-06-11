@@ -37,40 +37,36 @@ if (!empty($searchKeyword)) {
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Recs. </title>
-    <link rel="stylesheet" href="./resources/styles.css">
     <link rel="icon" type="image/png" href="./resources/img/favicon.ico">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Lexend+Deca:wght@100..900&display=swap" rel="stylesheet">
 
 </head>
 
-<body class="custom-bd">
-    <header class="my-3 mx-5 d-flex justify-content-between align-items-center">
+<body>
+    <header class="">
         <a href="./index.php">
         </a>
-        <form action="" method="post" class="form-inline mb-3 d-flex justify-content-around align-items-center">
-            <label for="user" class="me-2">User:</label>
-            <input class="custom-input me-2" type="text" name="user">
-            <label for="password" class="me-2">Password:</label>
+        <form action="" method="post" class=>
+            <label for="user" class="">User:</label>
+            <input class="" type="text" name="user">
+            <label for="password" class="">Password:</label>
             <input class="custom-input me-2 " type="password" name="password">
-            <button class="btn btn-primary ml-2 secondary-button me-2" type="submit">Start session</button>
+            <button class="" type="submit">Start session</button>
         </form>
     </header>
-    <section class="d-flex mx-8">
-        <form class="row g-3 m-2" action="?action=search" method="get">
-            <div class="col-auto">
+    <section class="">
+        <form class="" action="?action=search" method="get">
+            <div class="">
 
-                <input type="text" name="keyword" class="form-control custom-input" id="inputPassword2" placeholder="Search...">
+                <input type="text" name="keyword" class="" id="inputPassword2" placeholder="Search...">
             </div>
-            <div class="col-auto">
-                <button type="submit" class="btn btn-primary mb-3 secondary-button">Search </button>
+            <div class="">
+                <button type="submit" class="">Search </button>
             </div>
         </form>
     </section>
 
-    <div class="container mt-5">
+    <div class="">
         <ul class="pagination">
             <?php for ($i = 1; $i <= $numberOfPages; $i++) : ?>
                 <li class="page-item <?= ($i == $page) ? 'active' : '' ?>">
@@ -78,18 +74,18 @@ if (!empty($searchKeyword)) {
                 </li>
             <?php endfor; ?>
         </ul>
-            <div class="row g-4">
+            <div class="">
             <?php if ($books) : ?>
                 <?php foreach ($books as $book) : ?>
-                    <div class="col-md-3">
-                        <div class="card custom-card" style="width: 18rem;">
-                            <img src="data:image/jpeg; base64,<?= base64_encode($book['image']) ?>" class="rounded-3 card-img-top py-3 px-5 " alt="Book Image">
-                            <div class="card-body d-flex flex-column justify-content-center align-items-center">
-                                <h4 class="card-title text-center custom-title"><?= $book['title'] ?></h4>
-                                <p class="card-text text-center fw-bolder"><strong></strong> <?= $book['author'] ?></p>
-                                <p class="card-text small text-center description"><strong></strong> <?= $book['description'] ?></p>
+                    <div class="">
+                        <div class="">
+                            <img src="data:image/jpeg; base64,<?= base64_encode($book['image']) ?>" class="" alt="Book Image">
+                            <div class="">
+                                <h4 class=""><?= $book['title'] ?></h4>
+                                <p class=""><strong></strong> <?= $book['author'] ?></p>
+                                <p class=""><strong></strong> <?= $book['description'] ?></p>
 
-                            <a href="src/view/bookDetails.php?id=<?= $book['id'] ?>" class="btn btn-light primary-button custom-button">View more</a>
+                            <a href="src/view/bookDetails.php?id=<?= $book['id'] ?>" class="">View more</a>
                         </div>
                     </div>
                 </div>
