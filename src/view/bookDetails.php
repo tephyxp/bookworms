@@ -34,7 +34,7 @@ $book = $bookController->getBookDetails($bookId);
         <a href="../../index.php">
         </a>
         <div class="form-inline mb-3 d-flex justify-content-around align-items-center">
-            <a href="../../index.php" class="btn btn-primary ml-2 secondary-button me-2">Back -></a>
+            <a href="../../index.php" class="btn btn-primary ml-2 secondary-button me-2">Back ➜</a>
         </div>
     </header>
     <main class="container">
