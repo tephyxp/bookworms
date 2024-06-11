@@ -87,7 +87,7 @@ if (!empty($searchKeyword)) {
                                 <p class="card-text text-center fw-bolder"><strong></strong> <?= $book['author'] ?></p>
                                 <p class="card-text small text-center description"><strong></strong> <?= $book['description'] ?></p>
 
-                            <a href="src/view/bookDetails.php?id=<?= $book['id'] ?>" class="btn btn-light rounded-3 primary-button custom-button">View more</a>
+                            <a href="src/view/bookDetails.php?id=<?= $book['id'] ?>" class="btn btn-light primary-button custom-button">View more</a>
                         </div>
                     </div>
                 </div>

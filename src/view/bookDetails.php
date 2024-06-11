@@ -39,7 +39,7 @@ $book = $bookController->getBookDetails($bookId);
     </header>
     <main class="container">
       <article class="d-flex justify-content-center align-items-center flex-column">
-        <img src="data:image/jpeg;base64,<?=base64_encode($book['image']) ?>" alt="Book Image" class="img-fluid w-20 h-40 m-4">
+        <img src="data:image/jpeg;base64,<?=base64_encode($book['image']) ?>" alt="Book cover image" class="img-fluid w-20 h-40 m-4">
         <h3 class="custom-blue-text mt-4"><?= $book["title"];?></h3>
         <h4 class="custom-blue-text mt-3"><?= $book["author"];?></h4>
         <p class="paragraph-text mt-3 text-center" style="width: 50%;"><?= $book["description"];?></p>
