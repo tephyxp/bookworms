@@ -4,14 +4,12 @@ use PDO;
 use PDOException;
 
     class Database{
-        //parametros db
         private $host;
         private $db_name;
         private $username;
         private $password;
         private $conn;
 
-    // Constructor
     public function __construct(){
 
         $env = parse_ini_file(__DIR__ . '/../.env');
@@ -23,7 +21,6 @@ use PDOException;
         $this->password = $env['DDBB_PASSWORD'];
     }
 
-        //Conexion db
         public function connect(){
             $this->conn = null;
 

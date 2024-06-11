@@ -36,8 +36,9 @@ if (!empty($searchKeyword)) {
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Bookworms Biblioteca</title>
+    <title>Recs. </title>
     <link rel="stylesheet" href="./resources/styles.css">
+    <link rel="icon" type="image/png" href="./resources/img/favicon.ico">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Roboto+Slab:wght@400;700&display=swap">
 
@@ -46,25 +47,23 @@ if (!empty($searchKeyword)) {
 <body class="custom-bd">
     <header class="my-3 mx-5 d-flex justify-content-between align-items-center">
         <a href="./index.php">
-            <img src="./resources/img/bookworms.png" alt="Logo" class="logo">
         </a>
         <form action="" method="post" class="form-inline mb-3 d-flex justify-content-around align-items-center">
-            <label for="user" class="me-2">Usuario:</label>
+            <label for="user" class="me-2">User:</label>
             <input class="custom-input me-2" type="text" name="user">
-            <label for="password" class="me-2">Contraseña:</label>
+            <label for="password" class="me-2">Password:</label>
             <input class="custom-input me-2 " type="password" name="password">
-            <button class="btn btn-primary ml-2 secondary-button me-2" type="submit">Iniciar sesión</button>
+            <button class="btn btn-primary ml-2 secondary-button me-2" type="submit">Start session</button>
         </form>
     </header>
-    <h1 class="m-3 text-center my-5 first-title">BOOKWORMS</h1>
-    <section class="d-flex justify-content-center">
+    <section class="d-flex mx-8">
         <form class="row g-3 m-2" action="?action=search" method="get">
             <div class="col-auto">
 
-                <input type="text" name="keyword" class="form-control custom-input" id="inputPassword2" placeholder="Buscar">
+                <input type="text" name="keyword" class="form-control custom-input" id="inputPassword2" placeholder="Search...">
             </div>
             <div class="col-auto">
-                <button type="submit" class="btn btn-primary mb-3 secondary-button">Buscar </button>
+                <button type="submit" class="btn btn-primary mb-3 secondary-button">Search </button>
             </div>
         </form>
     </section>
@@ -88,13 +87,13 @@ if (!empty($searchKeyword)) {
                                 <p class="card-text text-center fw-bolder"><strong></strong> <?= $book['author'] ?></p>
                                 <p class="card-text small text-center description"><strong></strong> <?= $book['description'] ?></p>
 
-                            <a href="src/view/bookDetails.php?id=<?= $book['id'] ?>" class="btn btn-light rounded-3 primary-button custom-button">Ver más</a>
+                            <a href="src/view/bookDetails.php?id=<?= $book['id'] ?>" class="btn btn-light rounded-3 primary-button custom-button">View more</a>
                         </div>
                     </div>
                 </div>
             <?php endforeach; ?>
         <?php else : ?>
-            <p>No hay libros en la base de datos.</p>
+            <p>There are no books in the database</p>
         <?php endif; ?>
     </div>
 </div>
