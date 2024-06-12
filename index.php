@@ -1,6 +1,5 @@
 <?php
 
-
 require_once __DIR__ . "/vendor/autoload.php";
 
 use Controller\BooksController;
@@ -28,19 +27,10 @@ if (!empty($searchKeyword)) {
 }
 
 
+$pageTitle = "Recs. Book Recommendations";
+include __DIR__ . '/src/view/layout.php';
+
 ?>
-
-<!doctype html>
-<html lang="en">
-
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Recs. </title>
-    <link rel="icon" type="image/png" href="./resources/img/favicon.ico">
-    <link href="https://fonts.googleapis.com/css2?family=Lexend+Deca:wght@100..900&display=swap" rel="stylesheet">
-
-</head>
 
 <body>
     <header class="">
@@ -97,6 +87,5 @@ if (!empty($searchKeyword)) {
 </div>
 
 
-    <?php
-    require_once __DIR__ . '/src/view/head/footer.php';
-    ?>
+</body>
+</html>

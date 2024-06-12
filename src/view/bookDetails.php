@@ -49,7 +49,6 @@ $book = $bookController->getBookDetails($bookId);
     </main>
   
     <?php
-    require_once __DIR__ . '/head/footer.php';
     ?>
 
 
