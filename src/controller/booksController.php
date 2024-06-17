@@ -34,7 +34,7 @@ class BooksController
 
     public function searchBooks($keyword)
     {
-        $keyword = isset($_GET['keyword']) ? $_GET['keyword'] : '';
+        // $keyword = isset($_GET['keyword']) ? $_GET['keyword'] : '';
         return  $this->model->searchBooks($keyword);
     }
 

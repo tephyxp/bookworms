@@ -87,10 +87,24 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $books = $booksController->searchBooks($searchKeyword);
 
 
-$pageTitle = "Recs. Admin Panel";
-include __DIR__ . '/layout.php';
-
 ?>
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <title>Recs. Admin Panel</title>
+    <link href="../styles.css" rel="stylesheet">
+    <link rel="icon" type="image/png" href="/resources/img/favicon.ico">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+    </style>
+</html>
 
 <body class="">
     <header class="">
