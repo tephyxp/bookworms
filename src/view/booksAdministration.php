@@ -95,23 +95,22 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <title>Recs. Admin Panel</title>
+    <link href="../custom-styles.css" rel="stylesheet">
     <link href="../styles.css" rel="stylesheet">
-    <link rel="icon" type="image/png" href="/resources/img/favicon.ico">
+    <link rel="icon" type="image/png" href="../../resources/img/favicon.ico">
+    <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
 </head>
-<style>
-        body {
-            font-family: 'Inter', sans-serif;
-        }
-    </style>
-</html>
 
 <body class="">
-    <header class="">
-        <a href="../../index.php">
+<header class="bg-bright-yellow h-16 flex items-center justify-between p-4">
+<div class="text-black font-bold text-5xl">
+        Recs.
+    </div>
+    <a href="../../index.php">
         </a>
         <form action="" method="post">
-            <input type="submit" name="logout" value="Log out" class="">
+            <input type="submit" name="logout" value="LOG OUT" class=" text-gray-700 font-semibold border border-gray-700 py-2 px-4 bg-lilac">
         </form>
     </header>
 
@@ -172,15 +171,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             </div>
         </form>
 
-        <section class="">
-            <form class="" action="?action=search" method="get">
-                <div class="">
-                    <input type="text" name="keyword" class="" placeholder="Search...">
-                </div>
-                <div class="">
-                    <button type="submit" class="">Search </button>
-                </div>
-            </form>
+        <section class="m-4">
+        <form action="?action=search" method="get" class="flex items-center space-x-2">
+            <input type="text" name="keyword" class="w-64 border border-gray-400 py-1" placeholder=" Search by title or author...">
+            <button type="submit" class="bg-lilac border border-gray-600 px-2 py-1">Search</button>
+        </form>
         </section>
 
         <section>
@@ -238,5 +233,5 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     </main>
 
     <?php
-
+    require_once __DIR__ . '/partials/footer.php';
     ?>

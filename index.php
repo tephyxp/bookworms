@@ -13,7 +13,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 }
 
 $page = isset($_GET['page']) ? intval($_GET['page']) : 1;
-$limit = 8;
+$limit = 12;
 $totalBooks = $booksController->getTotalBooks();
 $numberOfPages = ceil($totalBooks / $limit);
 
@@ -39,7 +39,6 @@ if (!empty($searchKeyword)) {
     <link rel="icon" type="image/png" href="../recs/resources/img/favicon.ico">
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css" integrity="sha512-Fo3rlrQkTy0vSTK+mkwTo1PY7x4t/TpP4KlfF/e+ux+OP7vK/lF+dyIqR+xgXM/8A1fnd7HjK1F34JqxjU8RA==" crossorigin="anonymous" referrerpolicy="no-referrer" />
 </head>
 <style>
         body {
@@ -58,40 +57,36 @@ if (!empty($searchKeyword)) {
             <input class="w-24" type="text" name="user">
             <label for="password" class="text-m">Password:</label>
             <input class="w-24" type="password" name="password">
-            <button class=" text-gray-700 font-semibold border-2 border-gray-700 py-2 px-4 bg-lilac" type="submit">START</button>
+            <button class=" text-gray-700 font-semibold border border-gray-700 py-2 px-4 bg-lilac" type="submit">LOG IN</button>
         </form>
     </header>
-    <section class="flex flex-row>
-        <form class="" action="?action=search" method="get">
-            <div>
-                <input type="text" name="keyword" class="border border-gray-400 py-1 ml-8 mt-8" placeholder=" Search...">
-            </div>
-            <div>
-                <button type="submit" class="mt-9 ml-4">Search </button>
-            </div>
+    <section class="flex justify-between items-center mx-20 my-8">
+        <form action="?action=search" method="get" class="flex items-center space-x-2">
+            <input type="text" name="keyword" class="w-64 border border-gray-400 py-1" placeholder=" Search by title or author...">
+            <button type="submit" class="border border-gray-600 bg-lilac px-2 py-1">Search</button>
         </form>
-    </section>
 
-    <div class="">
-        <ul class="pagination">
+        <ul class="flex gap-2 items-center">
+            <li>Page:</li>
             <?php for ($i = 1; $i <= $numberOfPages; $i++) : ?>
-                <li class="page-item <?= ($i == $page) ? 'active' : '' ?>">
+                <li class="page-item <?= ($i == $page) ? 'underline' : 'text-gray-500' ?>">
                     <a class="page-link" href="?page=<?= $i ?>"><?= $i ?></a>
                 </li>
             <?php endfor; ?>
         </ul>
-            <div class=>
+    </section>
+            <div class="grid grid-cols-4 gap-6 mx-20 mt-4">
             <?php if ($books) : ?>
                 <?php foreach ($books as $book) : ?>
-                    <div class="">
-                        <div class="">
-                            <img src="data:image/jpeg; base64,<?= base64_encode($book['image']) ?>" class="" alt="Book Image">
-                            <div class="">
-                                <h4 class=""><?= $book['title'] ?></h4>
-                                <p class=""><strong></strong> <?= $book['author'] ?></p>
-                                <p class=""><strong></strong> <?= $book['description'] ?></p>
+                    <div class="mb-8">
+                        <div class="bg-gray-200 flex flex-col items-center justify-center pt-8 h-80">
+                            <img src="data:image/jpeg; base64,<?= base64_encode($book['image']) ?>" class="h-48 w-36 mb-4 shadow-2xl" alt="Cover of <?= htmlspecialchars($book['title']) ?>">
+                            <div class="text-center py-4 px-6">
+                                <!-- <h3 class="text-xl font-bold"><?= $book['title'] ?></h3> -->
+                                <!-- <h4 class="mt-2 text-lg font-medium"><strong></strong> <?= $book['author'] ?></h4> -->
+                                <!-- <p class=""><strong></strong> <?= $book['description'] ?></p> -->
 
-                            <a href="src/view/bookDetails.php?id=<?= $book['id'] ?>" class="">View more</a>
+                            <a href="src/view/bookDetails.php?id=<?= $book['id'] ?>" class="border border-gray-600 bg-lilac px-2 py-1 font-medium">View more</a>
                         </div>
                     </div>
                 </div>
@@ -101,7 +96,9 @@ if (!empty($searchKeyword)) {
         <?php endif; ?>
     </div>
 </div>
-
-
 </body>
 </html>
+
+<?php
+    require_once __DIR__ . '/src/view/partials/footer.php';
+    ?>
