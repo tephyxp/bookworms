@@ -192,16 +192,16 @@ if ($bookId !== null) {
                 <div
                     class="bg-gray-200 flex flex-col items-center justify-center pt-8 h-160 relative">
                     <img src="data:image/jpeg;base64,<?= base64_encode($book['image']) ?>"
-                        class=" h-48 w-36 shadow-2xl absolute top-4"
+                        class=" h-48 w-36 shadow-2xl absolute top-6"
                         alt="Cover of <?= htmlspecialchars($book['title']) ?>">
                     <div
                         class="text-center py-4 px-6">
                         <h4
-                            class="text-lg font-semibold mb-1 mt-44"><?= $book['title'] ?></h4>
+                            class="text-lg font-semibold mb-1 mt-48"><?= $book['title'] ?></h4>
                         <p
                             class="text-gray-700 mb-2"><?= $book['author'] ?></p>
                         <p
-                            class="text-sm"><?= substr($book['description'], 0, 100) . (strlen($book['description']) > 100 ? '...' : '') ?></p>
+                            class="text-sm"><?= substr($book['description'], 0, 99) . (strlen($book['description']) > 99 ? '...' : '') ?></p>
                         <div
                             class="mt-4">
                             <a
