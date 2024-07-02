@@ -27,7 +27,6 @@ if (isset($_GET['confirm_delete']) && $_GET['confirm_delete'] !== '') {
     $result = $booksController->deleteBook($confirmDeleteId);
 
     if ($result) {
-        // Redirect to the same page to remove confirm_delete from URL and show success message
         header("Location: booksAdministration.php?success=Book deleted successfully");
         exit();
     } else {
@@ -48,7 +47,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $result = $booksController->editBook($bookId, $isbn, $title, $author, $image, $description);
 
         if ($result) {
-            // Redirect to the same page to show success message
             header("Location: booksAdministration.php?success=Book edited successfully");
             exit();
         } else {
