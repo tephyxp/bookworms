@@ -18,16 +18,15 @@ if (isset($_POST['logout'])) {
 }
 
 $booksController = new BooksController();
-$bookId = $_GET['id'] ?? null;
+$bookId = $_GET['edit'] ?? null; 
 $bookIdToDelete = $_GET['delete'] ?? null;
 
-// Handle book deletion if confirm_delete is set
+
 if (isset($_GET['confirm_delete']) && $_GET['confirm_delete'] !== '') {
     $confirmDeleteId = $_GET['confirm_delete'];
     $result = $booksController->deleteBook($confirmDeleteId);
 
     if ($result) {
-        // Redirect to the same page to remove confirm_delete from URL and show success message
         header("Location: booksAdministration.php?success=Book deleted successfully");
         exit();
     } else {
@@ -35,7 +34,7 @@ if (isset($_GET['confirm_delete']) && $_GET['confirm_delete'] !== '') {
     }
 }
 
-// Handle book editing
+
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (isset($_POST['editBookSubmit'])) {
         $isbn = $_POST['isbn'];
@@ -48,7 +47,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $result = $booksController->editBook($bookId, $isbn, $title, $author, $image, $description);
 
         if ($result) {
-            // Redirect to the same page to show success message
             header("Location: booksAdministration.php?success=Book edited successfully");
             exit();
         } else {
@@ -60,10 +58,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 $searchKeyword = isset($_GET['keyword']) ? $_GET['keyword'] : '';
 $books = $booksController->searchBooks($searchKeyword);
 
-// Initialize $bookDetails
+
 $bookDetails = null;
 
-// Fetch book details if $bookId is set
+
 if ($bookId !== null) {
     $bookDetails = $booksController->getBookDetails($bookId);
 }
@@ -82,6 +80,7 @@ if ($bookId !== null) {
     <link rel="icon" type="image/png" href="../../resources/img/favicon.ico">
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
 </head>
 
 <body class="">
@@ -124,7 +123,7 @@ if ($bookId !== null) {
 
             <div>
                 <label for="title"
-                    class="block font-medium text-gray-700 mb-2">Title</label>
+                    class="block font-medium text-gray-800 mb-2">Title</label>
                 <input type="text" id="title" name="title"
                     class="w-full border border-gray-400 p-2 h-12"
                     value="<?= (isset($_SESSION['title'])) ? $_SESSION['title'] : (($bookDetails !== null) ? $bookDetails['title'] : '') ?>"
@@ -133,7 +132,7 @@ if ($bookId !== null) {
 
             <div>
                 <label for="author"
-                    class="block font-medium text-gray-700 mb-2">Author</label>
+                    class="block font-medium text-gray-800 mb-2">Author</label>
                 <input type="text" id="author" name="author"
                     class="w-full border border-gray-400 p-2 h-12"
                     value="<?= (isset($_SESSION['author'])) ? $_SESSION['author'] : (($bookDetails !== null) ? $bookDetails['author'] : '') ?>"
@@ -142,7 +141,7 @@ if ($bookId !== null) {
 
             <div>
                 <label for="isbn"
-                    class="block font-medium text-gray-700 mb-2">ISBN</label>
+                    class="block font-medium text-gray-800 mb-2">ISBN</label>
                 <input type="text" id="isbn" name="isbn"
                     class="w-full border border-gray-400 p-2 h-12"
                     value="<?= (isset($_SESSION['isbn'])) ? $_SESSION['isbn'] : (($bookDetails !== null) ? $bookDetails['isbn'] : '') ?>"
@@ -151,7 +150,7 @@ if ($bookId !== null) {
 
             <div>
                 <label for="image"
-                    class="block font-medium text-gray-700 mb-2">Cover
+                    class="block font-medium text-gray-800 mb-2">Cover
                     Image</label>
                 <input type="file" id="image" name="image"
                     class="w-full border border-gray-400 p-2"
@@ -160,7 +159,7 @@ if ($bookId !== null) {
 
             <div class="col-span-2">
                 <label for="description"
-                    class="block font-medium text-gray-700 mb-2">Description</label>
+                    class="block font-medium text-gray-800 mb-2">Description</label>
                 <textarea id="description" name="description" rows="4"
                     class="w-full border border-gray-400 p-2"
                     required><?= (isset($_SESSION['description'])) ? $_SESSION['description'] : (($bookDetails !== null) ? $bookDetails['description'] : '') ?></textarea>
@@ -169,7 +168,7 @@ if ($bookId !== null) {
             <div class="col-span-2 flex justify-center mb-4">
                 <button type="submit"
                     name="<?= ($bookId !== null) ? 'editBookSubmit' : 'addBook' ?>"
-                    class="text-gray-700 font-semibold border border-gray-700 py-2 px-4 bg-lilac"><?= ($bookId !== null) ? 'Save changes' : 'Add book' ?></button>
+                    class="border border-gray-600 py-2 px-4 bg-lilac"><?= ($bookId !== null) ? 'Save changes' : 'Add book' ?></button>
             </div>
         </form>
 
@@ -194,25 +193,33 @@ if ($bookId !== null) {
                 <div
                     class="bg-gray-200 flex flex-col items-center justify-center pt-8 h-160 relative">
                     <img src="data:image/jpeg;base64,<?= base64_encode($book['image']) ?>"
-                        class=" h-48 w-36 shadow-2xl absolute top-4"
+                        class=" h-48 w-36 shadow-2xl absolute top-6"
                         alt="Cover of <?= htmlspecialchars($book['title']) ?>">
                     <div
                         class="text-center py-4 px-6">
                         <h4
-                            class="text-lg font-semibold mb-1 mt-44"><?= $book['title'] ?></h4>
+                            class="text-lg font-semibold mb-1 mt-48"><?= $book['title'] ?></h4>
+                        <h5
+                            class="mb-2"><?= $book['author'] ?></h5>
                         <p
-                            class="text-gray-700 mb-2"><?= $book['author'] ?></p>
-                        <p
-                            class="text-sm"><?= substr($book['description'], 0, 100) . (strlen($book['description']) > 100 ? '...' : '') ?></p>
+                            class="text-sm"><?= substr($book['description'], 0, 99) . (strlen($book['description']) > 99 ? '...' : '') ?></p>
                         <div
                             class="mt-4">
+                            
                             <a
-                                href="booksAdministration.php?delete=<?= $book['id'] ?>"
-                                class="text-red-500"
-                                >Delete</a>
+                            href="booksAdministration.php?delete=<?= $book['id'] ?>"
+                            class="bg-gray-500 border border-gray-600 px-2 py-1 font-semibold text-white">
+                            <i class="fas fa-trash-alt text-white mr-1"></i>
+                            Delete
+                            </a>
+                            
                             <a
-                                href="booksAdministration.php?id=<?= $book['id'] ?>"
-                                class="text-blue-500 ml-4">Edit</a>
+                            href="booksAdministration.php?edit=<?= $book['id'] ?>"
+                            class="bg-lilac border border-gray-600 px-2 py-1 font-semibold ml-2">
+                            <i class="fas fa-pen text-gray-800 mr-0.5"></i>
+                            Edit
+                            </a>
+
                         </div>
                     </div>
                 </div>
@@ -230,7 +237,7 @@ if ($bookId !== null) {
         <div
             class="fixed inset-0 flex items-center justify-center bg-gray-800 bg-opacity-75 z-50">
             <div
-                class="bg-white p-6 rounded-lg max-w-lg w-full mx-auto">
+                class="bg-white p-6 max-w-lg w-full mx-auto">
                 <h5
                     class="text-lg font-bold">Confirm
                     Deletion</h5>
@@ -242,10 +249,10 @@ if ($bookId !== null) {
                     class="flex justify-end space-x-4">
                     <a
                         href="booksAdministration.php"
-                        class="px-4 py-2 bg-gray-200 text-gray-800 rounded-md">Cancel</a>
+                        class="px-4 py-2 bg-gray-300 font-semibold">Cancel</a>
                     <a
                         href="booksAdministration.php?confirm_delete=<?= $bookIdToDelete ?>"
-                        class="px-4 py-2 bg-red-500 text-white rounded-md">Delete</a>
+                        class="px-4 py-2 bg-red-600 text-white font-semibold">Delete</a>
                 </div>
             </div>
         </div>
