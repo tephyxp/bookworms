@@ -7,18 +7,21 @@ use Controller\UserController;
 
 session_start();
 
+
 if (!isset($_SESSION['user'])) {
     header("Location: ../../index.php");
     exit();
 }
 
+
 if (isset($_POST['logout'])) {
-    $userController = new UserController;
+    $userController = new UserController();
     $userController->logout();
 }
 
+
 $booksController = new BooksController();
-$bookId = $_GET['edit'] ?? null; 
+$bookId = $_GET['edit'] ?? null;
 $bookIdToDelete = $_GET['delete'] ?? null;
 
 
@@ -53,19 +56,34 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             echo 'Error editing the book';
         }
     }
+
+
+    if (isset($_POST['addBook'])) {
+        $isbn = $_POST['isbn'];
+        $title = $_POST['title'];
+        $author = $_POST['author'];
+        $image = file_get_contents($_FILES["image"]["tmp_name"]);
+        $description = $_POST['description'];
+
+        $result = $booksController->addBook($isbn, $title, $author, $image, $description);
+
+        if ($result) {
+            unset($_SESSION['isbn'], $_SESSION['title'], $_SESSION['author'], $_SESSION['description'], $_SESSION['image']);
+            header("Location: booksAdministration.php?success=Book added successfully");
+            exit();
+        } else {
+            echo 'Error adding the book';
+        }
+    }
 }
 
-$searchKeyword = isset($_GET['keyword']) ? $_GET['keyword'] : '';
+$searchKeyword = $_GET['keyword'] ?? '';
 $books = $booksController->searchBooks($searchKeyword);
 
-
 $bookDetails = null;
-
-
 if ($bookId !== null) {
     $bookDetails = $booksController->getBookDetails($bookId);
 }
-
 ?>
 
 <!DOCTYPE html>
