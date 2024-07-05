@@ -99,9 +99,14 @@ if ($bookId !== null) {
     <link href="https://cdn.jsdelivr.net/npm/tailwindcss@2.2.19/dist/tailwind.min.css" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css"/>
+    <style>
+        body {
+            font-family: 'Inter', sans-serif;
+        }
+    </style>
 </head>
 
-<body class="">
+<body>
     <header class="bg-bright-yellow h-16 flex items-center justify-between p-4">
         <div class="text-black font-bold text-5xl">
             Recs.
@@ -110,7 +115,7 @@ if ($bookId !== null) {
         </a>
         <form action="" method="post">
             <input type="submit" name="logout" value="LOG OUT"
-                class=" text-gray-700 font-semibold border border-gray-700 py-2 px-4 bg-lilac">
+                class="text-gray-700 font-semibold border border-gray-700 py-2 px-4 bg-lilac">
         </form>
     </header>
 
