@@ -31,19 +31,19 @@ $book = $bookController->getBookDetails($bookId);
 
 <body class="flex flex-col min-h-screen">
   <header class="bg-bright-yellow h-16 flex items-center justify-between p-4">
-  <div class="text-black font-bold text-5xl">Recs.</div>
+  <a href="../../index.php" class="text-black font-bold text-5xl">Recs.</a>
         <a href="../../index.php" class="text-gray-700 font-semibold border border-gray-700 py-2 px-4 bg-lilac">
         BACK ➔ </a>
     </header>
 
     <main class="flex-grow">
       <section class="flex flex-row py-20 justify-center">
-        <img src="data:image/jpeg;base64,<?=base64_encode($book['image']) ?>" alt="Cover of <?= htmlspecialchars($book['title']) ?>" class="">
+        <img src="data:image/jpeg;base64,<?=base64_encode($book['image']) ?>" alt="Cover of <?= htmlspecialchars($book['title']) ?>" class="h-96 w-68">
         <article class="pl-10 w-3/6">
-        <h3 class=><?= $book["title"];?></h3>
-        <h4 class=><?= $book["author"];?></h4>
-        <span class="italic"><?= $book["isbn"];?></span>
-        <p class=><?= $book["description"];?></p>
+        <h3 class="font-bold text-4xl"><?= $book["title"];?></h3>
+        <h4 class="font-regular text-2xl"><?= $book["author"];?></h4>
+        <span class=""><?= $book["publish_date"];?></span>
+        <p class="mt-2"><?= $book["description"];?></p>
         </article>
       </section>
       </main>
