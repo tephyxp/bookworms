@@ -40,14 +40,14 @@ if (isset($_GET['confirm_delete']) && $_GET['confirm_delete'] !== '') {
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (isset($_POST['editBookSubmit'])) {
-        $isbn = $_POST['isbn'];
+        $publish_date = $_POST['publish_date'];
         $title = $_POST['title'];
         $author = $_POST['author'];
         $image = file_get_contents($_FILES["image"]["tmp_name"]);
         $description = $_POST['description'];
 
         $bookId = $_POST['bookId'];
-        $result = $booksController->editBook($bookId, $isbn, $title, $author, $image, $description);
+        $result = $booksController->editBook($bookId, $publish_date, $title, $author, $image, $description);
 
         if ($result) {
             header("Location: booksAdministration.php?success=Book edited successfully");
@@ -59,16 +59,16 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
 
 
     if (isset($_POST['addBook'])) {
-        $isbn = $_POST['isbn'];
+        $publish_date = $_POST['publish_date'];
         $title = $_POST['title'];
         $author = $_POST['author'];
         $image = file_get_contents($_FILES["image"]["tmp_name"]);
         $description = $_POST['description'];
 
-        $result = $booksController->addBook($isbn, $title, $author, $image, $description);
+        $result = $booksController->addBook($publish_date, $title, $author, $image, $description);
 
         if ($result) {
-            unset($_SESSION['isbn'], $_SESSION['title'], $_SESSION['author'], $_SESSION['description'], $_SESSION['image']);
+            unset($_SESSION['publish_date'], $_SESSION['title'], $_SESSION['author'], $_SESSION['description'], $_SESSION['image']);
             header("Location: booksAdministration.php?success=Book added successfully");
             exit();
         } else {
@@ -120,19 +120,19 @@ if ($bookId !== null) {
     </header>
 
     <main>
-        <div class="">
-            <div class="">
+        <div>
+            <div>
                 <?php if (isset($error)) : ?>
-                <div class="" role="alert">
+                <div role="alert">
                     <strong><?php echo $error; ?></strong>
-                    <button type="button" class="" data-bs-dismiss="alert"
+                    <button type="button" data-bs-dismiss="alert"
                         aria-label="Close"></button>
                 </div>
                 <?php endif; ?>
                 <?php if (isset($_GET['success'])) : ?>
-                <div class="" role="alert">
+                <div role="alert">
                     <?php echo $_GET['success']; ?>
-                    <button type="button" class="" data-bs-dismiss="alert"
+                    <button type="button" data-bs-dismiss="alert"
                         aria-label="Close"></button>
                 </div>
                 <?php endif; ?>
@@ -163,11 +163,11 @@ if ($bookId !== null) {
             </div>
 
             <div>
-                <label for="isbn"
-                    class="block font-medium text-gray-800 mb-2">ISBN</label>
-                <input type="text" id="isbn" name="isbn"
+                <label for="publish_date"
+                    class="block font-medium text-gray-800 mb-2">Year of Publication</label>
+                <input type="text" id="publish_date" name="publish_date"
                     class="w-full border border-gray-400 p-2 h-12"
-                    value="<?= (isset($_SESSION['isbn'])) ? $_SESSION['isbn'] : (($bookDetails !== null) ? $bookDetails['isbn'] : '') ?>"
+                    value="<?= (isset($_SESSION['publish_date'])) ? $_SESSION['publish_date'] : (($bookDetails !== null) ? $bookDetails['publish_date'] : '') ?>"
                     required>
             </div>
 
@@ -188,7 +188,7 @@ if ($bookId !== null) {
                     required><?= (isset($_SESSION['description'])) ? $_SESSION['description'] : (($bookDetails !== null) ? $bookDetails['description'] : '') ?></textarea>
             </div>
 
-            <div class="col-span-2 flex justify-center mb-4">
+            <div class="col-span-2 flex justify-center mb-1">
                 <button type="submit"
                     name="<?= ($bookId !== null) ? 'editBookSubmit' : 'addBook' ?>"
                     class="border border-gray-600 py-2 px-4 bg-lilac"><?= ($bookId !== null) ? 'Save changes' : 'Add book' ?></button>
@@ -216,7 +216,7 @@ if ($bookId !== null) {
                 <div
                     class="bg-gray-200 flex flex-col items-center justify-center pt-8 h-160 relative">
                     <img src="data:image/jpeg;base64,<?= base64_encode($book['image']) ?>"
-                        class=" h-48 w-36 shadow-2xl absolute top-6"
+                        class="h-48 w-36 shadow-2xl absolute top-6"
                         alt="Cover of <?= htmlspecialchars($book['title']) ?>">
                     <div
                         class="text-center py-4 px-6">

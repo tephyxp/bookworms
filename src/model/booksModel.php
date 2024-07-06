@@ -66,12 +66,12 @@ class booksModel
         return ($stmt->execute()) ? $stmt->fetchAll(PDO::FETCH_ASSOC) : false;
     }
 
-    public function addBook($isbn, $title, $author, $image, $description)
+    public function addBook($publish_date, $title, $author, $image, $description)
     {
-        $query = "INSERT INTO books(id, isbn, title, author, image, description) VALUES (null, :isbn, :title, :author, :image, :description)";
+        $query = "INSERT INTO books(id, publish_date, title, author, image, description) VALUES (null, :publish_date, :title, :author, :image, :description)";
 
         $stmt = $this->PDO->prepare($query);
-        $stmt->bindParam(':isbn', $isbn, PDO::PARAM_STR);
+        $stmt->bindParam(':publish_date', $publish_date, PDO::PARAM_STR);
         $stmt->bindParam(':title', $title, PDO::PARAM_STR);
         $stmt->bindParam(':author', $author, PDO::PARAM_STR);
         $stmt->bindParam(':image', $image, PDO::PARAM_LOB);
@@ -100,13 +100,13 @@ class booksModel
 
     }
     
-    public function editBook($id, $isbn, $title, $author, $image, $description)
+    public function editBook($id, $publish_date, $title, $author, $image, $description)
     {
-        $query = "UPDATE books SET isbn = :isbn, title = :title, author = :author, image = :image, description = :description WHERE id = :id";
+        $query = "UPDATE books SET publish_date = :publish_date, title = :title, author = :author, image = :image, description = :description WHERE id = :id";
 
         $stmt = $this->PDO->prepare($query);
         $stmt->bindParam(':id', $id);
-        $stmt->bindParam(':isbn', $isbn);
+        $stmt->bindParam(':publish_date', $publish_date);
         $stmt->bindParam(':title', $title);
         $stmt->bindParam(':author', $author);
         $stmt->bindParam(':image', $image);
