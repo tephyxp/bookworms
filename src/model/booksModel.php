@@ -66,16 +66,16 @@ class booksModel
         return ($stmt->execute()) ? $stmt->fetchAll(PDO::FETCH_ASSOC) : false;
     }
 
-    public function addBook($publish_date, $title, $author, $image, $description)
+    public function addBook($publish_date, $title, $author, $image, $review)
     {
-        $query = "INSERT INTO books(id, publish_date, title, author, image, description) VALUES (null, :publish_date, :title, :author, :image, :description)";
+        $query = "INSERT INTO books(id, publish_date, title, author, image, review) VALUES (null, :publish_date, :title, :author, :image, :review)";
 
         $stmt = $this->PDO->prepare($query);
         $stmt->bindParam(':publish_date', $publish_date, PDO::PARAM_STR);
         $stmt->bindParam(':title', $title, PDO::PARAM_STR);
         $stmt->bindParam(':author', $author, PDO::PARAM_STR);
         $stmt->bindParam(':image', $image, PDO::PARAM_LOB);
-        $stmt->bindParam(':description', $description, PDO::PARAM_STR);
+        $stmt->bindParam(':review', $review, PDO::PARAM_STR);
 
         if ($stmt->execute()) {
             return $this->PDO->lastInsertId();
@@ -100,9 +100,9 @@ class booksModel
 
     }
     
-    public function editBook($id, $publish_date, $title, $author, $image, $description)
+    public function editBook($id, $publish_date, $title, $author, $image, $review)
     {
-        $query = "UPDATE books SET publish_date = :publish_date, title = :title, author = :author, image = :image, description = :description WHERE id = :id";
+        $query = "UPDATE books SET publish_date = :publish_date, title = :title, author = :author, image = :image, review = :review WHERE id = :id";
 
         $stmt = $this->PDO->prepare($query);
         $stmt->bindParam(':id', $id);
@@ -110,7 +110,7 @@ class booksModel
         $stmt->bindParam(':title', $title);
         $stmt->bindParam(':author', $author);
         $stmt->bindParam(':image', $image);
-        $stmt->bindParam(':description', $description);
+        $stmt->bindParam(':review', $review);
 
         if ($stmt->execute()) {
             return true;

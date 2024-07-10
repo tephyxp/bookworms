@@ -77,7 +77,7 @@ $books = $searchKeyword ? $booksController->searchBooks($searchKeyword) : $books
                 <?php foreach ($books as $book) : ?>
                     <div class="mb-8">
                         <div class="bg-gray-200 flex flex-col items-center justify-center pt-8 h-60 sm:h-80">
-                            <img src="data:image/jpeg;base64,<?= base64_encode($book['image']) ?>" class="h-32 w-24 md:h-48 md:w-36 mb-4 shadow-2xl" alt="Cover of <?= htmlspecialchars($book['title']) ?>">
+                            <img src="data:image/jpeg;base64,<?= base64_encode($book['image']) ?>" class="h-32 w-24 md:h-48 md:w-32 mb-4 shadow-2xl" alt="Cover of <?= htmlspecialchars($book['title']) ?>">
                             <div class="text-center py-4 px-6">
                                 <a href="src/view/bookDetails.php?id=<?= $book['id'] ?>" class="border border-gray-600 bg-lilac px-2 py-1 font-medium">View more</a>
                             </div>

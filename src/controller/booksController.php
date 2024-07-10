@@ -38,12 +38,12 @@ class BooksController
         return  $this->model->searchBooks($keyword);
     }
 
-    public function addBook($publish_date, $title, $author, $image, $description)
+    public function addBook($publish_date, $title, $author, $image, $review)
     {
         if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['addBook'])) {
 
-            if (!empty($publish_date) && !empty($title) && !empty($author) && !empty($image) && !empty($description)) {
-                $result = $this->model->addBook($publish_date, $title, $author, $image, $description);
+            if (!empty($publish_date) && !empty($title) && !empty($author) && !empty($image) && !empty($review)) {
+                $result = $this->model->addBook($publish_date, $title, $author, $image, $review);
                 $success = 'The details were added correctly';
                 return header("Location: ../view/booksAdministration.php?success=" . urlencode($success));
             } else {
@@ -58,9 +58,9 @@ class BooksController
     }
 
 
-    public function editBook($id, $publish_date, $title, $author, $image, $description)
+    public function editBook($id, $publish_date, $title, $author, $image, $review)
     {
-        $result = $this->model->editBook($id, $publish_date, $title, $author, $image, $description);
+        $result = $this->model->editBook($id, $publish_date, $title, $author, $image, $review);
         $success = 'The details were edited correctly';
 
         return ($result) ?  header("Location: ../view/booksAdministration.php?success=" . urlencode($success)): 'Error editing the book';
