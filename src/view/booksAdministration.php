@@ -44,10 +44,10 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $title = $_POST['title'];
         $author = $_POST['author'];
         $image = file_get_contents($_FILES["image"]["tmp_name"]);
-        $description = $_POST['description'];
+        $review = $_POST['review'];
 
         $bookId = $_POST['bookId'];
-        $result = $booksController->editBook($bookId, $publish_date, $title, $author, $image, $description);
+        $result = $booksController->editBook($bookId, $publish_date, $title, $author, $image, $review);
 
         if ($result) {
             header("Location: booksAdministration.php?success=Book edited successfully");
@@ -63,12 +63,12 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
         $title = $_POST['title'];
         $author = $_POST['author'];
         $image = file_get_contents($_FILES["image"]["tmp_name"]);
-        $description = $_POST['description'];
+        $review = $_POST['review'];
 
-        $result = $booksController->addBook($publish_date, $title, $author, $image, $description);
+        $result = $booksController->addBook($publish_date, $title, $author, $image, $review);
 
         if ($result) {
-            unset($_SESSION['publish_date'], $_SESSION['title'], $_SESSION['author'], $_SESSION['description'], $_SESSION['image']);
+            unset($_SESSION['publish_date'], $_SESSION['title'], $_SESSION['author'], $_SESSION['review'], $_SESSION['image']);
             header("Location: booksAdministration.php?success=Book added successfully");
             exit();
         } else {
@@ -181,11 +181,11 @@ if ($bookId !== null) {
             </div>
 
             <div class="col-span-2">
-                <label for="description"
-                    class="block font-medium text-gray-800 mb-2">Description</label>
-                <textarea id="description" name="description" rows="4"
+                <label for="review"
+                    class="block font-medium text-gray-800 mb-2">Review</label>
+                <textarea id="review" name="review" rows="4"
                     class="w-full border border-gray-400 p-2"
-                    required><?= (isset($_SESSION['description'])) ? $_SESSION['description'] : (($bookDetails !== null) ? $bookDetails['description'] : '') ?></textarea>
+                    required><?= (isset($_SESSION['review'])) ? $_SESSION['review'] : (($bookDetails !== null) ? $bookDetails['review'] : '') ?></textarea>
             </div>
 
             <div class="col-span-2 flex justify-center mb-1">
@@ -225,7 +225,7 @@ if ($bookId !== null) {
                         <h5
                             class="mb-2"><?= $book['author'] ?></h5>
                         <p
-                            class="text-sm"><?= substr($book['description'], 0, 99) . (strlen($book['description']) > 99 ? '...' : '') ?></p>
+                            class="text-sm"><?= substr($book['review'], 0, 99) . (strlen($book['review']) > 99 ? '...' : '') ?></p>
                         <div
                             class="mt-4">
                             

@@ -37,13 +37,13 @@ $book = $bookController->getBookDetails($bookId);
     </header>
 
     <main class="flex-grow">
-      <section class="flex flex-row py-20 justify-center">
+      <section class="flex md:flex-row sm: flex-col py-20 justify-center">
         <img src="data:image/jpeg;base64,<?=base64_encode($book['image']) ?>" alt="Cover of <?= htmlspecialchars($book['title']) ?>" class="h-96 w-68">
         <article class="pl-10 w-3/6">
         <h3 class="font-bold text-4xl"><?= $book["title"];?></h3>
         <h4 class="font-regular text-2xl"><?= $book["author"];?></h4>
         <span class=""><?= $book["publish_date"];?></span>
-        <p class="mt-2"><?= $book["description"];?></p>
+        <p class="mt-2"><?= $book["review"];?></p>
         </article>
       </section>
       </main>
