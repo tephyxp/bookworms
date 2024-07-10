@@ -216,7 +216,7 @@ if ($bookId !== null) {
                 <div
                     class="bg-gray-200 flex flex-col items-center justify-center pt-8 h-160 relative">
                     <img src="data:image/jpeg;base64,<?= base64_encode($book['image']) ?>"
-                        class="h-48 w-36 shadow-2xl absolute top-6"
+                        class="h-48 w-32 shadow-2xl absolute top-6"
                         alt="Cover of <?= htmlspecialchars($book['title']) ?>">
                     <div
                         class="text-center py-4 px-6">
