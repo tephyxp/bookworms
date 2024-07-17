@@ -7,23 +7,21 @@ use Controller\UserController;
 
 session_start();
 
-
 if (!isset($_SESSION['user'])) {
     header("Location: ../../index.php");
     exit();
 }
 
-
 if (isset($_POST['logout'])) {
     $userController = new UserController();
     $userController->logout();
+    header("Location: ../../index.php");
+    exit();
 }
-
 
 $booksController = new BooksController();
 $bookId = $_GET['edit'] ?? null;
 $bookIdToDelete = $_GET['delete'] ?? null;
-
 
 if (isset($_GET['confirm_delete']) && $_GET['confirm_delete'] !== '') {
     $confirmDeleteId = $_GET['confirm_delete'];
@@ -36,7 +34,6 @@ if (isset($_GET['confirm_delete']) && $_GET['confirm_delete'] !== '') {
         echo 'Error deleting the book';
     }
 }
-
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (isset($_POST['editBookSubmit'])) {
@@ -56,7 +53,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             echo 'Error editing the book';
         }
     }
-
 
     if (isset($_POST['addBook'])) {
         $publish_date = $_POST['publish_date'];
@@ -207,7 +203,6 @@ if ($bookId !== null) {
             </form>
         </section>
 
-
         <section>
             <div
                 class="grid grid-cols-4 gap-6 mx-20 mt-4 mb-8">
@@ -216,7 +211,7 @@ if ($bookId !== null) {
                 <div
                     class="bg-gray-200 flex flex-col items-center justify-center pt-8 h-160 relative">
                     <img src="data:image/jpeg;base64,<?= base64_encode($book['image']) ?>"
-                        class="h-48 w-36 shadow-2xl absolute top-6"
+                        class="h-48 w-32 shadow-2xl absolute top-6"
                         alt="Cover of <?= htmlspecialchars($book['title']) ?>">
                     <div
                         class="text-center py-4 px-6">
