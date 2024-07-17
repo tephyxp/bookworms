@@ -7,23 +7,21 @@ use Controller\UserController;
 
 session_start();
 
-
 if (!isset($_SESSION['user'])) {
     header("Location: ../../index.php");
     exit();
 }
 
-
 if (isset($_POST['logout'])) {
     $userController = new UserController();
     $userController->logout();
+    header("Location: ../../index.php");
+    exit();
 }
-
 
 $booksController = new BooksController();
 $bookId = $_GET['edit'] ?? null;
 $bookIdToDelete = $_GET['delete'] ?? null;
-
 
 if (isset($_GET['confirm_delete']) && $_GET['confirm_delete'] !== '') {
     $confirmDeleteId = $_GET['confirm_delete'];
@@ -36,7 +34,6 @@ if (isset($_GET['confirm_delete']) && $_GET['confirm_delete'] !== '') {
         echo 'Error deleting the book';
     }
 }
-
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     if (isset($_POST['editBookSubmit'])) {
@@ -56,7 +53,6 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
             echo 'Error editing the book';
         }
     }
-
 
     if (isset($_POST['addBook'])) {
         $publish_date = $_POST['publish_date'];
@@ -206,7 +202,6 @@ if ($bookId !== null) {
                     class="bg-lilac border border-gray-600 px-2 py-1">Search</button>
             </form>
         </section>
-
 
         <section>
             <div

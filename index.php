@@ -72,7 +72,7 @@ $books = $searchKeyword ? $booksController->searchBooks($searchKeyword) : $books
             </ul>
         </section>
 
-        <div class="grid grid-cols-2 sm:grid-cols-2 mx-2 lg:grid-cols-4 gap-6 md:mx-20 mt-4">
+        <div class="grid grid-cols-2 mx-2 lg:grid-cols-4 gap-6 md:mx-20 mt-4">
             <?php if ($books) : ?>
                 <?php foreach ($books as $book) : ?>
                     <div class="mb-8">
