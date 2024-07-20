@@ -34,35 +34,36 @@ class BooksController
 
     public function searchBooks($keyword)
     {
-        // $keyword = isset($_GET['keyword']) ? $_GET['keyword'] : '';
-        return  $this->model->searchBooks($keyword);
+        return $this->model->searchBooks($keyword);
     }
 
     public function addBook($publish_date, $title, $author, $image, $review)
     {
-        if ($_SERVER['REQUEST_METHOD'] === 'POST' && isset($_POST['addBook'])) {
-
-            if (!empty($publish_date) && !empty($title) && !empty($author) && !empty($image) && !empty($review)) {
-                $result = $this->model->addBook($publish_date, $title, $author, $image, $review);
-                $success = 'The details were added correctly';
-                return header("Location: ../view/booksAdministration.php?success=" . urlencode($success));
-            } else {
-                return 'Error creating the book';
-            }
+        if (!empty($publish_date) && !empty($title) && !empty($author) && !empty($image) && !empty($review)) {
+            $result = $this->model->addBook($publish_date, $title, $author, $image, $review);
+            $success = 'The details were added correctly';
+            return header("Location: ../view/booksAdministration.php?success=" . urlencode($success));
+        } else {
+            return 'Error creating the book';
         }
     }
 
     public function deleteBook($id)
     {
-        return ($this->model->deleteBook($id)) ? header("Location: ../view/booksAdministration.php") : 'Error deleting the book';
+        $result = $this->model->deleteBook($id);
+        if ($result) {
+            $success = 'Book deleted successfully';
+            return header("Location: ../view/booksAdministration.php?success=" . urlencode($success));
+        } else {
+            return 'Error deleting the book';
+        }
     }
-
 
     public function editBook($id, $publish_date, $title, $author, $image, $review)
     {
         $result = $this->model->editBook($id, $publish_date, $title, $author, $image, $review);
         $success = 'The details were edited correctly';
 
-        return ($result) ?  header("Location: ../view/booksAdministration.php?success=" . urlencode($success)): 'Error editing the book';
+        return ($result) ? header("Location: ../view/booksAdministration.php?success=" . urlencode($success)) : 'Error editing the book';
     }
 }
