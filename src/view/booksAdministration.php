@@ -4,12 +4,15 @@ require_once __DIR__ . "/../../vendor/autoload.php";
 use Controller\BooksController;
 use Controller\UserController;
 
+
 session_start();
+
 
 if (!isset($_SESSION['user'])) {
     header("Location: ../../index.php");
     exit();
 }
+
 
 if (isset($_POST['logout'])) {
     $userController = new UserController();
