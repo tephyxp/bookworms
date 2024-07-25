@@ -1,4 +1,4 @@
-# Recs. Book Reccommendations 
+# Recs. Book Recommendations 
 
 Book recommendations site that enables all users to view and search book recommendations by title and author. The site also features a login-accessible CRUD where users with admin permissions can add new book recommendations as well as editing and deleting existing entries. 
 
