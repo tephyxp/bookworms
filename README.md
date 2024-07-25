@@ -1,6 +1,9 @@
-# Recs. Book Reccommendations 
 
-Book recommendations site that enables all users to view and search book recommendations by title and author. The site also features a login-accessible CRUD where users with admin permissions can add new book recommendations as well as editing and deleting existing entries. 
+# Recs. Book Recommendations App
+
+![ ](<resources/img/smaller recs.png>)       ![alt text](<resources/img/Recs. (3).jpg>)
+ 
+ Book recommendations site that enables all users to view and search book recommendations by title and author. The site also features a login-accessible CRUD where users with admin permissions can add new book recommendations as well as editing and deleting existing entries. 
 
 IMAGE OF MAIN PAGE
 
