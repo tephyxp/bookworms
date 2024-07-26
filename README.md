@@ -4,7 +4,7 @@
  
  Book recommendations site that enables all users to view and search book recommendations by title and author. The site also features a login-accessible CRUD where users with admin permissions can add new book recommendations as well as editing and deleting existing entries. 
 
-IMAGE OF MAIN PAGE
+![Recs. book recommendations app main page](<resources/img/main image.jpg>)
 
 ## Table of Contents
 
@@ -47,17 +47,7 @@ You will need to develop a PHP web application connected to a MySQL database. Yo
 
 ### Demo Videos and Images
 
-Desktop demo video:
-
-VIDEO
-
-Mobile demo video:
-
-VIDEO
-
-Screenshot of ...
-
-Screenshot of ...
+XXXX XXXX XXXX
 
 ### Link 
 
@@ -98,18 +88,12 @@ This project includes unit testing in PHPUnit to ensure the reliability and func
   - Confirms that the method deletes the book as expected
 
 
+
+#### To run the tests, use this command in the terminal:
+
 ```
-PS C:\xampp\htdocs\phpstuff\recs> vendor/bin/phpunit tests/BooksControllerTest.php
-PHPUnit 10.5.28 by Sebastian Bergmann and contributors.
+phpunit --bootstrap vendor/autoload.php tests/BooksControllerTest.php
 
-Runtime:       PHP 8.2.12
-
-.........                                                           9 / 9 (100%)
-
-Time: 00:00.046, Memory: 8.00 MB
-
-OK (9 tests, 11 assertions)
-PS C:\xampp\htdocs\phpstuff\recs> 
 ```
 
 
@@ -118,7 +102,7 @@ PS C:\xampp\htdocs\phpstuff\recs>
 To install this project: 
 
 - Clone or fork the repository https://github.com/lolamindi/recs 
-- Make sure to place the project in the htdocs folder of XAMPP (or MAMP) installation
+- Make sure to place the project in the htdocs folder of your local XAMPP (or MAMP) installation
 - Create a MySQL database named: bookworms_library 
 - Create a .env file at the root of your project and modify the password field according to whether you use XAMPP or MAMP:
 
@@ -140,39 +124,39 @@ The following technologies and versions were used in this project:
 - **HTML5**: Structuring the content of the web application
 - **Tailwind CSS (v3.4.4)**: Utility-first CSS framework for styling
 - **PostCSS (v8.4.38)**: CSS processor used with Tailwind CSS
-- **Autoprefixer (v10.4.19)**: Adds vendor prefixes for browser compatibility
-- **CSS3**: Custom styling 
-- **PHP (v7.4)**: Server-side scripting language for backend logic
+- **Autoprefixer (v10.4.19)**: Adds vendor prefixes for browser compatibility, used with PostCSS
+- **PHP (v8.2.12)**: Server-side scripting language for backend logic
 - **PHPUnit (v10.5)**: Framework for writing and running PHP tests
 - **Composer (v2.6.6)**: Dependency manager for PHP packages
-- **MySQL(v8.2.12)**: Relational database system for storing application data 
-- **Apache (v2.4.53)**: Web server used to serve the PHP application
+- **MySQL(v8.0.30)**: Relational database system for storing application data 
+- **Apache (v2.4.58)**: Web server used to serve the PHP application
 - **XAMPP Control Panel(v3.3.0)**: Manages Apache, MySQL, and PHP locally
 
 ### Features 
 
 - MVC architecture 
+- Object-oriented programming
 - Password-protected admin page with login
 - CRUD capabilities 
 - Pagination
-- Responsive design for non-admin pages 
 - Search feature by book title or author
 - Confirmation and notification modals
+- Responsive design for non-admin pages 
 - Personalised, original book reviews 
 
 ### Project Updates 
 
 When originally submitted in February 2024, this project was tailored to our class requirements for a desktop-only library book app in Spanish that prioritised backend functioning.  
 
-Following project updates, completed in July 2024, the app:
+Project updates, completed between June and August 2024, include:
 
-- Features a new name, logo, and layout, as well as an eye-catching fluorescent yellow and lilac colour scheme
-- Uses Tailwind instead of Bootstrap for styling
-- Is now responsive on the main page and details page
-- Comes with an extensive README
-- Includes a more extensive range of unit tests 
-- Has been translated to English
-- Showcases a curated collection of books with original book reviews written by Laura Artaza 
+- A new app name, logo, layout, and colour scheme
+- Switching from Bootstrap to Tailwind CSS  
+- Responsive main page and book details page
+- A comprehensive updated README in English
+- A more extensive range of unit tests 
+- Full translation to English of the code and web content
+- A curated collection of original book reviews
  
 
 ### Authors
