@@ -66,6 +66,49 @@ Screenshot of ...
 
 ### Testing
 
+This project includes unit testing in PHPUnit to ensure the reliability and functionality of the BooksController class, which interacts with the booksModel class. The tests focus on checking that various functions exist and work correctly. All tests passed. Here is an overview of the tests and their purposes:
+
+#### Controller Tests (BooksControllerTest.php)
+Purpose: Validate the functionality and presence of methods within the BooksController class, which interacts with the booksModel class.
+
+Tests Include:
+
+Method Existence Tests:
+- testThatThereIsAGetBooksFunction(): Verifies that the getBooks method exists in the BooksController class.
+- testThatThereIsASearchBooksFunction(): Ensures the searchBooks method is present.
+- testThatThereIsADeleteBookFunction(): Checks for the existence of the deleteBook method.
+- testThatThereIsAnAddBookFunction(): Confirms the presence of the addBook method.
+- testThatThereIsAnEditBookFunction(): Validates the existence of the editBook method.
+
+Functionality Tests:
+
+searchBooks($keyword):
+Mocks the searchBooks method of booksModel to return predefined results for a given keyword.
+Asserts that the results are not empty and match the expected output.
+addBook($publish_date, $title, $author, $image, $review):
+Mocks the addBook method of booksModel and verifies that it is called with the correct parameters.
+Ensures that the method executes as expected.
+editBook($id, $publish_date, $title, $author, $image, $review):
+Mocks the editBook method of booksModel to check if it is called with the correct arguments.
+Asserts that the method behaves as expected.
+deleteBook($id):
+Mocks the deleteBook method of booksModel and ensures it is called with the correct ID.
+Confirms that the method performs as intended.
+
+
+```
+PS C:\xampp\htdocs\phpstuff\recs> vendor/bin/phpunit tests/BooksControllerTest.php
+PHPUnit 10.5.28 by Sebastian Bergmann and contributors.
+
+Runtime:       PHP 8.2.12
+
+.........                                                           9 / 9 (100%)
+
+Time: 00:00.046, Memory: 8.00 MB
+
+OK (9 tests, 11 assertions)
+PS C:\xampp\htdocs\phpstuff\recs> 
+```
 
 
 ### Installation 
