@@ -15,7 +15,7 @@ IMAGE OF MAIN PAGE
   - [Testing](#testing)
   - [Installation](#installation)
 
-- [The process](#the-process)
+- [The Process](#the-process)
   - [Technologies](#technologies)
   - [Features](#features)
   - [Project Updates](#project-updates)
@@ -68,32 +68,34 @@ Screenshot of ...
 
 This project includes unit testing in PHPUnit to ensure the reliability and functionality of the BooksController class, which interacts with the booksModel class. The tests focus on checking that various functions exist and work correctly. All tests passed. Here is an overview of the tests and their purposes:
 
-#### Controller Tests (BooksControllerTest.php)
-Purpose: Validate the functionality and presence of methods within the BooksController class, which interacts with the booksModel class.
+#### Method Existence Tests:
+- *testThatThereIsAGetBooksFunction()* ---> Verifies that the getBooks method exists in the BooksController class
 
-Tests Include:
+- *testThatThereIsASearchBooksFunction()* ---> Ensures the searchBooks method is present
 
-Method Existence Tests:
-- testThatThereIsAGetBooksFunction(): Verifies that the getBooks method exists in the BooksController class.
-- testThatThereIsASearchBooksFunction(): Ensures the searchBooks method is present.
-- testThatThereIsADeleteBookFunction(): Checks for the existence of the deleteBook method.
-- testThatThereIsAnAddBookFunction(): Confirms the presence of the addBook method.
-- testThatThereIsAnEditBookFunction(): Validates the existence of the editBook method.
+- *testThatThereIsADeleteBookFunction()* ---> Checks for the existence of the deleteBook method
 
-Functionality Tests:
+- *testThatThereIsAnAddBookFunction()* ---> Confirms the presence of the addBook method
 
-searchBooks($keyword):
-Mocks the searchBooks method of booksModel to return predefined results for a given keyword.
-Asserts that the results are not empty and match the expected output.
-addBook($publish_date, $title, $author, $image, $review):
-Mocks the addBook method of booksModel and verifies that it is called with the correct parameters.
-Ensures that the method executes as expected.
-editBook($id, $publish_date, $title, $author, $image, $review):
-Mocks the editBook method of booksModel to check if it is called with the correct arguments.
-Asserts that the method behaves as expected.
-deleteBook($id):
-Mocks the deleteBook method of booksModel and ensures it is called with the correct ID.
-Confirms that the method performs as intended.
+- *testThatThereIsAnEditBookFunction()* ---> Validates the existence of the editBook method
+
+#### Functionality Tests:
+
+- *testSearchBooksFunctionality()*
+  - Mocks the searchBooks method of booksModel to check that it returns the correct results for a given keyword
+  - Asserts that the results are not empty and matches with the expected output
+
+- *testAddBookFunctionality()*
+  - Mocks the addBook method of booksModel to check that it is called with the correct parameters
+  - Confirms that the method adds the book as expected
+
+- *testEditBookFunctionality()*
+  - Mocks the editBook method of booksModel to check that it is called with the correct parameters
+  - Confirms that the method edits the book as expected
+
+- *testDeleteBookFunctionality()*
+  - Mocks the deleteBook method of booksModel to check that it is called with the correct parameters
+  - Confirms that the method deletes the book as expected
 
 
 ```
@@ -162,12 +164,14 @@ The following technologies and versions were used in this project:
 
 When originally submitted in February 2024, this project was tailored to our class requirements for a desktop-only library book app in Spanish that prioritised backend functioning.  
 
-Following project updates, complete in July 2024, the app:
+Following project updates, completed in July 2024, the app:
 
-- Has been translated to English
-- Features a new name, logo, and layout, as well as an eye-catching acid yellow and lilac colour scheme
+- Features a new name, logo, and layout, as well as an eye-catching fluorescent yellow and lilac colour scheme
 - Uses Tailwind instead of Bootstrap for styling
-- Includes a responsive main page for all users to view and search book reviews 
+- Is now responsive on the main page and details page
+- Comes with an extensive README
+- Includes a more extensive range of unit tests 
+- Has been translated to English
 - Showcases a curated collection of books with original book reviews written by Laura Artaza 
  
 
