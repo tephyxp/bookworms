@@ -15,7 +15,7 @@ IMAGE OF MAIN PAGE
   - [Testing](#testing)
   - [Installation](#installation)
 
-- [The process](#the-process)
+- [The Process](#the-process)
   - [Technologies](#technologies)
   - [Features](#features)
   - [Project Updates](#project-updates)
@@ -66,6 +66,51 @@ Screenshot of ...
 
 ### Testing
 
+This project includes unit testing in PHPUnit to ensure the reliability and functionality of the BooksController class, which interacts with the booksModel class. The tests focus on checking that various functions exist and work correctly. All tests passed. Here is an overview of the tests and their purposes:
+
+#### Method Existence Tests:
+- *testThatThereIsAGetBooksFunction()* ---> Verifies that the getBooks method exists in the BooksController class
+
+- *testThatThereIsASearchBooksFunction()* ---> Ensures the searchBooks method is present
+
+- *testThatThereIsADeleteBookFunction()* ---> Checks for the existence of the deleteBook method
+
+- *testThatThereIsAnAddBookFunction()* ---> Confirms the presence of the addBook method
+
+- *testThatThereIsAnEditBookFunction()* ---> Validates the existence of the editBook method
+
+#### Functionality Tests:
+
+- *testSearchBooksFunctionality()*
+  - Mocks the searchBooks method of booksModel to check that it returns the correct results for a given keyword
+  - Asserts that the results are not empty and matches with the expected output
+
+- *testAddBookFunctionality()*
+  - Mocks the addBook method of booksModel to check that it is called with the correct parameters
+  - Confirms that the method adds the book as expected
+
+- *testEditBookFunctionality()*
+  - Mocks the editBook method of booksModel to check that it is called with the correct parameters
+  - Confirms that the method edits the book as expected
+
+- *testDeleteBookFunctionality()*
+  - Mocks the deleteBook method of booksModel to check that it is called with the correct parameters
+  - Confirms that the method deletes the book as expected
+
+
+```
+PS C:\xampp\htdocs\phpstuff\recs> vendor/bin/phpunit tests/BooksControllerTest.php
+PHPUnit 10.5.28 by Sebastian Bergmann and contributors.
+
+Runtime:       PHP 8.2.12
+
+.........                                                           9 / 9 (100%)
+
+Time: 00:00.046, Memory: 8.00 MB
+
+OK (9 tests, 11 assertions)
+PS C:\xampp\htdocs\phpstuff\recs> 
+```
 
 
 ### Installation 
@@ -121,10 +166,12 @@ When originally submitted in February 2024, this project was tailored to our cla
 
 Following project updates, completed in July 2024, the app:
 
-- Has been translated to English
-- Features a new name, logo, and layout, as well as an eye-catching acid yellow and lilac colour scheme
+- Features a new name, logo, and layout, as well as an eye-catching fluorescent yellow and lilac colour scheme
 - Uses Tailwind instead of Bootstrap for styling
-- Includes a responsive main page for all users to view and search book reviews 
+- Is now responsive on the main page and details page
+- Comes with an extensive README
+- Includes a more extensive range of unit tests 
+- Has been translated to English
 - Showcases a curated collection of books with original book reviews written by Laura Artaza 
  
 

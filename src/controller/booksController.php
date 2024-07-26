@@ -10,7 +10,12 @@ class BooksController
 
     public function __construct()
     {
-        $this->model = new booksModel;
+        $this->model = new booksModel();
+    }
+
+    public function setModel(booksModel $model)
+    {
+        $this->model = $model;
     }
 
     public function getBooks()
@@ -18,8 +23,9 @@ class BooksController
         return ($this->model->getBooks()) ? $this->model->getBooks() : 'There are no books in the database';
     }
 
-    public function getTotalBooks(){
-        return ($this ->model->getTotalBooks()  > 0) ? $this->model->getTotalBooks() : 'There are no books in the database';
+    public function getTotalBooks()
+    {
+        return ($this->model->getTotalBooks() > 0) ? $this->model->getTotalBooks() : 'There are no books in the database';
     }
 
     public function getBooksPagination($page, $limit)
@@ -67,3 +73,4 @@ class BooksController
         return ($result) ? header("Location: ../view/booksAdministration.php?success=" . urlencode($success)) : 'Error editing the book';
     }
 }
+
