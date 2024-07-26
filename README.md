@@ -119,7 +119,7 @@ The following technologies and versions were used in this project:
 
 When originally submitted in February 2024, this project was tailored to our class requirements for a desktop-only library book app in Spanish that prioritised backend functioning.  
 
-Following project updates, complete in July 2024, the app:
+Following project updates, completed in July 2024, the app:
 
 - Has been translated to English
 - Features a new name, logo, and layout, as well as an eye-catching acid yellow and lilac colour scheme
