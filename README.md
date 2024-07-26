@@ -150,13 +150,13 @@ When originally submitted in February 2024, this project was tailored to our cla
 
 Project updates, completed between June and August 2024, include:
 
-- A new app name, logo, layout, and colour scheme
-- Switching from Bootstrap to Tailwind CSS  
+- New app name, logo, layout, and colour scheme
+- Tailwind CSS for styling instead of Bootstrap 
 - Responsive main page and book details page
-- A comprehensive updated README in English
-- A more extensive range of unit tests 
+- Comprehensive README in English
+- More extensive range of unit tests 
 - Full translation to English of the code and web content
-- A curated collection of original book reviews
+- Curated collection of original book reviews
  
 
 ### Authors
